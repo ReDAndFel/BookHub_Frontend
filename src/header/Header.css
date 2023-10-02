@@ -1,0 +1,8 @@
+.header_container{
+    display: flex;
+    gap: 1em;
+    background-color: var(--nav_color);
+    align-items: center;
+    padding: 0.5em;
+    color: var(--color_font);
+}

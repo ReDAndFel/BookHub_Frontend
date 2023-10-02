@@ -1,0 +1,27 @@
+@font-face {
+    font-family: Roboto;
+    src: url(./assets/Roboto-Medium.ttf);
+    font-weight: medium;
+}
+
+@font-face {
+    font-family: Roboto;
+    src: url(./assets/Roboto-Bold.ttf);
+    font-weight: bold;
+}
+
+
+:root {
+    --color_font: #EFF1F3;
+    --primary_color: #03B5AA;
+    --secundary_color: #027971;
+    --background_color: #223843;
+    --nav_color: #233D49;
+}
+
+* {
+    font-family: Roboto;
+    margin: 0;
+    box-sizing: border-box;
+    padding: 0;
+}

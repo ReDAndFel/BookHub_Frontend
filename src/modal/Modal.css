@@ -1,0 +1,48 @@
+.modal {
+    position: fixed;
+    z-index: 10;
+    top: 0;
+    left: 0;
+    width: 100%;
+    min-height: 100vh;
+    display: none;
+    justify-content: center;
+    align-items: center;
+    background-color: #00000088;
+
+}
+
+.modal.is_open {
+    display: flex;
+}
+
+.modal_container {
+    background-color: var(--secundary_color);
+    padding: 1em;
+    border-radius: 1em;
+    display: flex;
+    flex-direction: column;
+    font-size: 1.2em;
+    gap: 1em;
+}
+
+.modal_header {
+    font-size: 1.4em;
+    font-weight: bold;
+    display: flex;
+    justify-content: space-between;
+    gap: 1em;
+    width: 100%;
+    align-items: center;
+}
+
+.modal_close_button {
+    background-color: var(--primary_color);
+    width: 2em;
+    height: 2em;
+    text-align: center;
+    border-radius: 0.4em;
+    border: none;
+    font-weight: bold;
+    color: var(--secundary_color);
+}

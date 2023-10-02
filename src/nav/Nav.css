@@ -1,0 +1,41 @@
+.nav {
+    background-color: var(--nav_color);
+    position: fixed;
+    width: 100vw;
+    bottom: 0;
+    padding: 0.3em;
+    display: grid;
+    grid-template-columns: repeat(3,1fr);
+    justify-content: center;
+    align-items: center;
+}
+.group_icon_nav{
+    display: flex;
+    justify-content: space-around;
+    
+}
+.icon_nav_container {
+    color: var(--color_font);
+    text-decoration: none;  
+    display: flex;
+    flex-direction: column;        
+}
+
+.icon_nav{
+    font-size: 1.5em;
+}
+
+.text_icon_nav{
+    font-size: 0.7em;
+}
+
+.icon_nav_container:hover,
+.icon_nav_container:focus {
+    color: var(--primary_color);
+    cursor: pointer;
+}
+
+.plus{
+    color: var(--primary_color);
+    font-size: 3em;
+}

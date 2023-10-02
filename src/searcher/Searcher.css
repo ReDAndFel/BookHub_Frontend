@@ -1,0 +1,15 @@
+.searcher input{
+    font-size: 1.2em;
+    border-radius: 1em;
+    padding: 0 0 0 0.4em;
+    width: 90vw;
+    background-color: var(--primary_color);    
+}
+
+.searcher input:focus{
+    outline: solid 0.05em #4cc7c7;
+}
+
+.searcher ::placeholder{
+    color: var(--color_font);
+}

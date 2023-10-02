@@ -1,0 +1,27 @@
+.home_container{
+    background-color: var(--background_color); 
+    height: 95vh;
+    overflow: hidden;
+    color: var(--color_font);   
+    display:flex;
+    flex-direction: column; 
+    gap: 1em;
+    padding: 1em;
+    
+}
+
+.home_container h1{
+    color: var(--primary_color);
+    text-align: center;
+}
+
+.home_container_books{
+    display: grid;
+    grid-template-columns: repeat(2, 1fr);
+    overflow-y: scroll;
+    gap: 2em;
+}
+.home_container_book{
+    display: flex;
+    justify-content: center;
+}

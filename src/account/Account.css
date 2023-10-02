@@ -1,0 +1,29 @@
+.account_container {
+    background-color: var(--background_color);
+    height: 90vh;
+}
+
+.account_user_profile {
+    display: flex;
+    gap: 1em;
+    align-items: center;
+}
+
+.icon_account {
+    font-size: 3em;
+}
+
+.account_items_container {
+    display: flex;
+    flex-direction: column;
+    gap: 1em;
+    padding-top: 1em;
+}
+
+
+.account_item {
+    background-color: var(--nav_color);
+    padding: 1em;display: flex;
+    gap: 1em;
+    color: var(--color_font);
+}

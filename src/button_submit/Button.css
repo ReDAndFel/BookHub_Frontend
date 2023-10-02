@@ -1,0 +1,10 @@
+.button_container{
+    display: flex;
+    font-size: 1.5em;
+    background-color: var(--primary_color);
+    color: var(--secundary_color);
+    border-radius: 0.3em;
+    padding: 0.3em;
+    width: 100%;
+    justify-content: center;
+}
