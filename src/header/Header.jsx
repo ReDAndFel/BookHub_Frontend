@@ -1,5 +1,7 @@
 import { useNavigate } from 'react-router-dom';
 import './Header.css'
+import { faChevronLeft } from '@fortawesome/free-solid-svg-icons';
+import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 
 export default function Header({children ,goBack}) {
 
@@ -12,7 +14,7 @@ export default function Header({children ,goBack}) {
     return (
         <>
             <div className='header_container'>
-                {goBack && <span onClick={handlerClick}>{`<`}</span>}
+                {goBack && <span onClick={handlerClick}>{<FontAwesomeIcon icon={faChevronLeft} />}</span>}
                 <span>{children}</span>
             </div>
         </>

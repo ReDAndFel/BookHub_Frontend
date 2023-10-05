@@ -18,7 +18,7 @@ export default function Account() {
     return (
         <>
             <Header>
-                <div className="account_user_profile" id="Profile">
+                <div className="account_user_profile" id="Perfil">
                     <FontAwesomeIcon className="icon_account" icon={faCircleUser} />
                     <h2>Username</h2>
                 </div>
@@ -32,15 +32,15 @@ export default function Account() {
                     <FontAwesomeIcon icon={faBook} />
                         <span className="text_account_item">Mi Libreria</span>
                     </div>
-                    <div className="account_item" id="PaymentMethods" onClick={handleClick}>
+                    <div className="account_item" id="Metodos_de_pago" onClick={handleClick}>
                     <FontAwesomeIcon icon={faCreditCard} />
                         <span className="text_account_item">Metodos de Pago</span>
                     </div>
-                    <div className="account_item" id="Friends" onClick={handleClick}>
+                    <div className="account_item" id="Amigos" onClick={handleClick}>
                     <FontAwesomeIcon icon={faUser} />
                         <span className="text_account_item">Amigos</span>
                     </div>
-                    <div className="account_item" id="Favorites" onClick={handleClick}>
+                    <div className="account_item" id="Favoritos" onClick={handleClick}>
                     <FontAwesomeIcon icon={faHeart} />
                         <span className="text_account_item">Favoritos</span>
                     </div>

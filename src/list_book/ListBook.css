@@ -1,0 +1,10 @@
+.list_book_container{
+    display: grid;
+    grid-template-columns: repeat(2, 1fr);
+    overflow-y: scroll;
+    gap: 2em;
+}
+.book_container{
+    display: flex;
+    justify-content: center;
+}

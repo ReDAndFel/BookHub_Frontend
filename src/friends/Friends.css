@@ -1,16 +1,18 @@
-.home_container{
+.friends_container{
     background-color: var(--background_color); 
-    height: 95vh;
+    height: 100vh;
     overflow: hidden;
     color: var(--color_font);   
     display:flex;
     flex-direction: column; 
     gap: 1em;
     padding: 1em;
-    
 }
 
-.home_container h1{
-    color: var(--primary_color);
-    text-align: center;
+.friends_list_container{
+    display: flex;
+    flex-direction: column;
+}
+.icon_add_friend{
+    width: 7em;
 }

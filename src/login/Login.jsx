@@ -33,7 +33,7 @@ export default function Login() {
         setErrors(validationsForm(form));
         if (Object.keys(errors).length === 0) {
             console.log(form);
-            navigate('/Home');
+            navigate('/Inicio');
         }
     };
 

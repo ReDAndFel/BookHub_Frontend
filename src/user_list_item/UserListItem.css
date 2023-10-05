@@ -1,0 +1,9 @@
+.user_list_item_container{
+    display: flex;
+    justify-content: space-between;
+    background-color: var(--nav_color);
+    color: var(--color_font);
+    padding: 0.5em  1em;
+    border-radius: 0.3em;
+    align-items: center;
+}
