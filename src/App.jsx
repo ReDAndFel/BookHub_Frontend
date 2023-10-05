@@ -33,8 +33,8 @@ function App() {
         <Route path='/Amigos/:idUser' element={<Friends />} />
         <Route path='/Favoritos/:idUser' element={<Favorites />} />
         <Route path='/Agregar_amigo/:idUser' element={<AddFriends />} />
+        <Route path='/Inicio/Category/:category' element={<Home />} />
         
-        a
       </Routes>      
     </div>
   )
