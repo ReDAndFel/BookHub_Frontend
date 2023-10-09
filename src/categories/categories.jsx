@@ -2,7 +2,6 @@ import Nav from "../nav/Nav";
 import Header from "../header/Header";
 import Searcher from "../searcher/Searcher";
 import './Categories.css'
-import { useState } from "react";
 import { useNavigate } from "react-router-dom";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faBook, faDragon, faFaceGrinHearts, faGlobe, faHeart, faSkull, faUserSecret } from "@fortawesome/free-solid-svg-icons";
@@ -11,7 +10,7 @@ export default function Categories() {
 
     const navigate = useNavigate();
     const handleClick = (category) => {
-        navigate(`/Inicio/Category/${category}`)
+        navigate(`/Inicio/Categoria/${category}`)
     }
 
     return (

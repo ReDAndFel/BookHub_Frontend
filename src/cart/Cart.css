@@ -1,0 +1,35 @@
+.cart_container{
+    background-color: var(--background_color); 
+    height: 90vh;
+    color: var(--color_font); 
+    display: flex;
+    gap: 1em;
+    flex-direction: column;  
+    
+}
+.cart_list_books{
+    padding-top: 1em;
+    display:flex;
+    flex-direction: column; 
+    gap: 1em;
+    overflow-y: scroll;
+    height: 88%;
+}
+.confirm_cart{
+    background-color: var(--nav_color);
+    color: var(--color_font);
+    padding: 1em;
+    position: fixed;
+    bottom: 9%;
+    width: 100%;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+}
+.button_cart_delete{
+    position: fixed;
+    width: 100%;
+    padding-right: 15em;
+    top: 4.3%;
+    background-color: var(--nav_color);
+}

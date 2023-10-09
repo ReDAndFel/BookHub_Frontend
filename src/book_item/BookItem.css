@@ -1,0 +1,16 @@
+.book_item_container{
+    background-color: var(--nav_color);
+    display: flex;
+    gap: 1em;
+    padding: 1em;
+}
+.info_book_item{
+    display: flex;
+    flex-direction: column;
+    gap: 1em;
+    color: var(--color_font);
+}
+.img_book_item{
+    width: 8em;
+    border-radius: 0.5em;
+}
