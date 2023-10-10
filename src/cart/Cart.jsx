@@ -39,11 +39,6 @@ export default function Cart() {
         setTotalPrice(total);
     }, [listBooks]);
 
-    useEffect(() => {
-        console.log(`La lista de libros en el carro tiene ${listBooks.length} libros`)
-        console.log({ listBooks })
-    }, [listBooks]);
-
     const handleDelete = () => {
         console.log(`La lista de libros SELECCIONADOS en el carro tiene ${listBooksSelected.length} libros`)
         console.log({ listBooksSelected })
@@ -58,12 +53,12 @@ export default function Cart() {
 
     return (
         <>
-            <Header goBack>Mi Carrito</Header>
+            <Header>Mi Carrito</Header>
             {listBooksSelected.length > 0 && <div className="button_cart_delete"><Button handlerClick={handleDelete}>Eliminar</Button></div>}
             <div className='cart_container'>
                 <div className="cart_list_books">
                     {
-                        listBooks.map((book, index) => <BookItem key={index} list={listBooksSelected} setList={setListBooksSelected} image={book.image} title={book.title} price={book.price}></BookItem>)
+                        listBooks.map((book) => <BookItem key={book.id} list={listBooksSelected} setList={setListBooksSelected} image={book.image} title={book.title} price={book.price}></BookItem>)
                     }
                 </div>
                 <div className="confirm_cart">

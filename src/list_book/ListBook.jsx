@@ -38,7 +38,7 @@ export default function ListBook() {
 
     return (
         <div className="list_book_container">
-            {listBooksInitial.map((book) => <div className="book_container" onClick={() => handlerClickCard(book.id)} ><CardBook image={book.image} price={book.price} title={book.title} key={book.id}  /></div>)}
+            {listBooksInitial.map((book) => <div className="book_container" onClick={() => handlerClickCard(book.id)} ><CardBook key={book.id} image={book.image} price={book.price} title={book.title}  /></div>)}
         </div>
     );
 }
