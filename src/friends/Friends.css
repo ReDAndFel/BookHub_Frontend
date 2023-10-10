@@ -1,6 +1,6 @@
 .friends_container{
     background-color: var(--background_color); 
-    height: 100vh;
+    height: 95.3vh;
     overflow: hidden;
     color: var(--color_font);   
     display:flex;
@@ -12,6 +12,8 @@
 .friends_list_container{
     display: flex;
     flex-direction: column;
+    overflow-y: scroll;
+    gap: 0.5em;
 }
 .icon_add_friend{
     width: 7em;

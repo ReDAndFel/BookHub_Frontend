@@ -7,7 +7,7 @@ import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faHeading, faPenNib, faSackDollar } from "@fortawesome/free-solid-svg-icons";
 
 const initialForm = {
-    image: "",
+    file: "",
     title: "",
     price: "",
     editorial: "",
@@ -18,9 +18,7 @@ const initialForm = {
 
 const validationsForm = (form) => {
     let errors = {};
-    if (form.image === '') {
-        errors.image = 'Se debe agregar una portada'
-    }
+        
     if (form.title === '') {
         errors.title = 'El campo "titulo" es requerido'
     }
@@ -44,7 +42,7 @@ const validationsForm = (form) => {
 
 export default function AddLibro(e) {
 
-    const { form, errors, setErrors, handleChange, handleBlur } = useForm(initialForm, validationsForm);
+    const { form, errors, setErrors, handleChange, handleSelectImage ,handleBlur } = useForm(initialForm, validationsForm);
     const navigate = useNavigate();
 
     const handleSubmit = (e) => {
@@ -63,8 +61,8 @@ export default function AddLibro(e) {
                 <form onSubmit={handleSubmit}>
 
                     <div className='input_file_add_book'>
-                        <label htmlFor="image">Portada: <input type='file' name='image' id='image' value={form.image} onChange={handleChange} onBlur={handleBlur} required /></label>
-                        {errors.image && <p>{errors.image}</p>}
+                        <label className={`label_file ${form.file != '' && 'selected'}`} htmlFor="file"> Subir Portada</label>
+                        <input className={`input_file ${form.file != '' && 'selected'}`} type='file' name='file' id='file' onChange={handleChange} required />
                     </div>
 
                     <div className='texfield_add_book'>

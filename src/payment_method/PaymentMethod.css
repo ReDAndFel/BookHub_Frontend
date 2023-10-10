@@ -1,20 +1,19 @@
-
-.payment_method_container{
-    height: 100vh;
+.payment_method_container {
+    height: 95.3vh;
     background-color: var(--background_color);
     display: flex;
     flex-direction: column;
     padding: 0.7em;
-    gap: 1em;    
+    gap: 1em;
 }
 
-.payment_methods_container{
+.payment_methods_container {
     display: flex;
     flex-direction: column;
     gap: 0.5em;
 }
 
-.button_payment_method{
+.button_payment_method {
     background-color: var(--primary_color);
     color: var(--secundary_color);
     padding: 0.3em;

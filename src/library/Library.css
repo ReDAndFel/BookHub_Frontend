@@ -1,6 +1,6 @@
 .library_container{
     background-color: var(--background_color); 
-    height: 100vh;
+    height: 95.3vh;
     overflow: hidden;
     color: var(--color_font);   
     display:flex;
