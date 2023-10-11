@@ -1,6 +1,6 @@
 .add_friends_container{
     background-color: var(--background_color); 
-    height: 100vh;
+    height: 95.3vh;
     overflow: hidden;
     color: var(--color_font);   
     display:flex;
@@ -13,4 +13,5 @@
     display: flex;
     flex-direction: column;
     gap: 0.5em;
+    overflow-y: scroll;
 }

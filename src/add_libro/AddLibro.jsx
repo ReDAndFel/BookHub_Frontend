@@ -7,18 +7,19 @@ import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faHeading, faPenNib, faSackDollar } from "@fortawesome/free-solid-svg-icons";
 
 const initialForm = {
-    file: "",
+    image: "",
     title: "",
     price: "",
     editorial: "",
     synopsis: "",
     category: "",
-    availability: false
+    availability: false,
+    file: ""
 }
 
 const validationsForm = (form) => {
     let errors = {};
-        
+
     if (form.title === '') {
         errors.title = 'El campo "titulo" es requerido'
     }
@@ -42,7 +43,7 @@ const validationsForm = (form) => {
 
 export default function AddLibro(e) {
 
-    const { form, errors, setErrors, handleChange, handleSelectImage ,handleBlur } = useForm(initialForm, validationsForm);
+    const { form, errors, setErrors, handleChange, handleBlur } = useForm(initialForm, validationsForm);
     const navigate = useNavigate();
 
     const handleSubmit = (e) => {
@@ -55,65 +56,73 @@ export default function AddLibro(e) {
     }
 
     return (
-        <>
+        <div className="add_book_main_container">
             <Header goBack>Publicar Libro</Header>
-            <div className='add_book_container'>
-                <form onSubmit={handleSubmit}>
 
-                    <div className='input_file_add_book'>
-                        <label className={`label_file ${form.file != '' && 'selected'}`} htmlFor="file"> Subir Portada</label>
-                        <input className={`input_file ${form.file != '' && 'selected'}`} type='file' name='file' id='file' onChange={handleChange} required />
-                    </div>
+            <form onSubmit={handleSubmit}>
 
-                    <div className='texfield_add_book'>
-                        <FontAwesomeIcon icon={faHeading} />
-                        <input type='text' name='title' id='title' placeholder="Titulo" value={form.title} onChange={handleChange} onBlur={handleBlur} autoComplete="off" required />
-                        {errors.title && <p>{errors.title}</p>}
-                    </div>
-                    <div className='texfield_add_book'>
-                        <FontAwesomeIcon icon={faSackDollar} />
-                        <input type='text' name='price' id='price' placeholder="Precio: $" value={form.price} onChange={handleChange} onBlur={handleBlur} autoComplete="off" required />
-                        {errors.price && <p>{errors.price}</p>}
-                    </div>
-                    <div className='texfield_add_book'>
-                        <FontAwesomeIcon icon={faPenNib} />
-                        <input type='text' name='editorial' id='editorial' placeholder="Editorial" value={form.editorial} onChange={handleChange} onBlur={handleBlur} autoComplete="off" required />
-                        {errors.editorial && <p>{errors.editorial}</p>}
-                    </div>
 
-                    <div className='textarea_add_book'>
-                        <FontAwesomeIcon icon={faPenNib} />
-                        <textarea name="synopsis" id="synopsis" placeholder="Sinopsis" value={form.synopsis} onChange={handleChange} onBlur={handleBlur} autoComplete="off" required />
-                        {errors.synopsis && <p>{errors.synopsis}</p>}
-                    </div>
 
-                    <div className='combo_box_book'>
-                        <select name="category" id="category" value={form.categogy} onChange={handleChange} onBlur={handleBlur} required>
-                            <option value=''>Selecciona una Categoría</option>
-                            <option value="Terror">Terror</option>
-                            <option value="Educacion">Educacion</option>
-                            <option value="Historia">Historia</option>
-                            <option value="Romance">Romance</option>
-                            <option value="Salud y Cuidado">Salud y Cuidado</option>
-                            <option value="Fantasia">Fantasia</option>
-                            <option value="Misterio">Misterio</option>
-                        </select>
-                        {errors.category && <p>{errors.category}</p>}
-                    </div>
+                <div className='input_file_add_book'>
+                    <label className={`label_file ${form.image !== '' && 'selected'}`} htmlFor="image">Subir Imagen</label>
+                    <input className={`input_file ${form.image !== '' && 'selected'}`} type='file' name='image' id='image' onChange={handleChange} required />
+                </div>
 
-                    <div className='combo_box_book'>
-                        <select name="availability" id="availability">
-                            <option value={true}>Disponible</option>
-                            <option value={false}>No disponible</option>
-                        </select>
-                        {errors.availability && <p>{errors.availability}</p>}
-                    </div>
 
-                    <ButtonSubmit>Publicar Libro</ButtonSubmit>
+                <div className='texfield_add_book'>
+                    <FontAwesomeIcon icon={faHeading} />
+                    <input type='text' name='title' id='title' placeholder="Titulo" value={form.title} onChange={handleChange} onBlur={handleBlur} autoComplete="off" required />
+                    {errors.title && <p>{errors.title}</p>}
+                </div>
+                <div className='texfield_add_book'>
+                    <FontAwesomeIcon icon={faSackDollar} />
+                    <input type='text' name='price' id='price' placeholder="Precio: $" value={form.price} onChange={handleChange} onBlur={handleBlur} autoComplete="off" required />
+                    {errors.price && <p>{errors.price}</p>}
+                </div>
+                <div className='texfield_add_book'>
+                    <FontAwesomeIcon icon={faPenNib} />
+                    <input type='text' name='editorial' id='editorial' placeholder="Editorial" value={form.editorial} onChange={handleChange} onBlur={handleBlur} autoComplete="off" required />
+                    {errors.editorial && <p>{errors.editorial}</p>}
+                </div>
 
-                </form>
-            </div>
-        </>
+                <div className='textarea_add_book'>
+                    <FontAwesomeIcon icon={faPenNib} />
+                    <textarea name="synopsis" id="synopsis" placeholder="Sinopsis" value={form.synopsis} onChange={handleChange} onBlur={handleBlur} autoComplete="off" required />
+                    {errors.synopsis && <p>{errors.synopsis}</p>}
+                </div>
+
+                <div className='combo_box_book'>
+                    <select name="category" id="category" value={form.categogy} onChange={handleChange} onBlur={handleBlur} required>
+                        <option value=''>Selecciona una Categoría</option>
+                        <option value="Terror">Terror</option>
+                        <option value="Educacion">Educacion</option>
+                        <option value="Historia">Historia</option>
+                        <option value="Romance">Romance</option>
+                        <option value="Salud y Cuidado">Salud y Cuidado</option>
+                        <option value="Fantasia">Fantasia</option>
+                        <option value="Misterio">Misterio</option>
+                    </select>
+                    {errors.category && <p>{errors.category}</p>}
+                </div>
+
+                <div className='combo_box_book'>
+                    <select name="availability" id="availability">
+                        <option value={true}>Disponible</option>
+                        <option value={false}>No disponible</option>
+                    </select>
+                    {errors.availability && <p>{errors.availability}</p>}
+                </div>
+
+                <div className='input_file_add_book'>
+                    <label className={`label_file ${form.file != '' && 'selected'}`} htmlFor="file"> Subir Archivo Libro</label>
+                    <input className={`input_file ${form.file != '' && 'selected'}`} type='file' name='file' id='file' onChange={handleChange} required />
+                </div>
+
+                <ButtonSubmit>Publicar Libro</ButtonSubmit>
+
+            </form>
+
+        </div>
 
     )
 }

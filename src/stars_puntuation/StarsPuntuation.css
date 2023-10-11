@@ -1,0 +1,7 @@
+.icon_stars_puntuation.solid{
+    color: var(--primary_color);
+}
+
+.icon_stars_puntuation.regular{
+    color: var(--font_color);
+}

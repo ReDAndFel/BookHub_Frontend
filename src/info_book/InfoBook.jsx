@@ -6,6 +6,7 @@ import { faStar } from '@fortawesome/free-solid-svg-icons';
 import { faHeart as solidHeart } from '@fortawesome/free-solid-svg-icons';
 import { faHeart as regularHeart } from '@fortawesome/free-regular-svg-icons';
 import Button from '../button/Button';
+import ReviewItem from '../review_item/ReviewItem';
 
 export default function InfoBook() {
     let { idBook } = useParams();
@@ -23,7 +24,43 @@ export default function InfoBook() {
         isFavorite: true
     }
 
+    const listUsersReview = [
+        {
+            id: 1,
+            username: 'Mario0123',
+            date: '10-02-2022',
+            puntuation: 5,
+            review: 'Buen libro'
+        },
+        {
+            id: 2,
+            username: 'Alex123',
+            date: '10-04-2022',
+            puntuation: 4,
+            review: 'Muy buena trama, pero podria ser mejor'
+        },
+        {
+            id: 3,
+            username: 'Maria',
+            date: '10-04-2022',
+            puntuation: 1,
+            review: 'Aburridisimo.'
+        },
+        {
+            id: 4,
+            username: 'Marsha11',
+            date: '10-10-2022',
+            puntuation: 5,
+            review: 'Una obra de arte'
+        },
+        
+    ]
+
     const handleAddCart = () => {
+
+    }
+
+    const handleSubmitReview = () => {
 
     }
 
@@ -49,7 +86,14 @@ export default function InfoBook() {
                 </div>
 
                 <div className='review_info_book_container'>
+                    <form className='form_review' onSubmit={handleSubmitReview}>
+                        <div>
 
+                        </div>
+                    </form>
+                    <div className='reviews_info_book'>
+                        {listUsersReview.map((userReview) => <div className='review_container'> <ReviewItem key={userReview.id} username={userReview.username} puntuation={userReview.puntuation} date={userReview.date} review={userReview.review} /></div>)}
+                    </div>
                 </div>
             </div>
         </>

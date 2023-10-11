@@ -1,0 +1,18 @@
+.review_item_container{
+    display: flex;
+    flex-direction: column;
+    gap: 0.5em;
+}
+
+.review_item_header, .review_item_subheader{
+    display: flex;
+    gap: 1em;
+    align-items: center;
+}
+.icon_review{
+    font-size: 1.5em;
+}
+
+.review_item_subheader span{
+    color: rgb(168, 168, 168);
+}

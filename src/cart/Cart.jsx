@@ -54,7 +54,7 @@ export default function Cart() {
     return (
         <>
             <Header>Mi Carrito</Header>
-            {listBooksSelected.length > 0 && <div className="button_cart_delete"><Button handlerClick={handleDelete}>Eliminar</Button></div>}
+            {listBooksSelected.length > 0 && <div className="button_cart_delete"><Button handlerClick={handleDelete}>Quitar Libro</Button></div>}
             <div className='cart_container'>
                 <div className="cart_list_books">
                     {

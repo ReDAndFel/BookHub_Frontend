@@ -13,7 +13,7 @@
     flex-direction: column; 
     gap: 1em;
     overflow-y: scroll;
-    height: 88%;
+    height: 86%;
 }
 .confirm_cart{
     background-color: var(--nav_color);
