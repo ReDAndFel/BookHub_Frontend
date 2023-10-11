@@ -1,6 +1,6 @@
 .search_container{
     background-color: var(--background_color); 
-    height: 95.3vh;
+    height: 94.3vh;
     overflow: hidden;
     color: var(--color_font);   
     display:flex;

@@ -1,21 +1,27 @@
-.cart_container{
-    background-color: var(--background_color); 
+.cart_container {
+    background-color: var(--background_color);
     height: 90vh;
-    color: var(--color_font); 
+    color: var(--color_font);
     display: flex;
     gap: 1em;
-    flex-direction: column;  
-    
+    flex-direction: column;
+
 }
-.cart_list_books{
+
+.cart_list_books {
     padding-top: 1em;
-    display:flex;
-    flex-direction: column; 
+    display: flex;
+    flex-direction: column;
     gap: 1em;
-    overflow-y: scroll;
+    overflow: auto;
     height: 86%;
 }
-.confirm_cart{
+
+.cart_list_books::-webkit-scrollbar {
+    display: none;
+}
+
+.confirm_cart {
     background-color: var(--nav_color);
     color: var(--color_font);
     padding: 1em;
@@ -26,7 +32,8 @@
     justify-content: space-between;
     align-items: center;
 }
-.button_cart_delete{
+
+.button_cart_delete {
     position: fixed;
     width: 100%;
     padding-right: 15em;

@@ -1,8 +1,11 @@
 .list_book_container{
     display: grid;
     grid-template-columns: repeat(2, 1fr);
-    overflow-y: scroll;
+    overflow: auto;    
     gap: 2em;
+}
+.list_book_container::-webkit-scrollbar{
+    display: none;
 }
 .book_container{
     display: flex;

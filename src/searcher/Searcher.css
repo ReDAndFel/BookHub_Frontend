@@ -3,7 +3,8 @@
     border-radius: 1em;
     padding: 0 0 0 0.4em;
     width: 90vw;
-    background-color: var(--primary_color);    
+    background-color: var(--primary_color); 
+    color: var(--color_font);   
 }
 
 .searcher input:focus{

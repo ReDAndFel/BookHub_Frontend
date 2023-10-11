@@ -1,7 +1,6 @@
 .add_friends_container{
     background-color: var(--background_color); 
-    height: 95.3vh;
-    overflow: hidden;
+    height: 94.3vh;
     color: var(--color_font);   
     display:flex;
     flex-direction: column; 
@@ -13,5 +12,8 @@
     display: flex;
     flex-direction: column;
     gap: 0.5em;
-    overflow-y: scroll;
+    overflow: auto;
+}
+.user_list_container::-webkit-scrollbar {
+    display: none;
 }

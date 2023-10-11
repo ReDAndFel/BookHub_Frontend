@@ -53,7 +53,7 @@ export default function InfoBook() {
             puntuation: 5,
             review: 'Una obra de arte'
         },
-        
+
     ]
 
     const handleAddCart = () => {

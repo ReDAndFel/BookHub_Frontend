@@ -1,17 +1,21 @@
-.add_book_main_container {
-    overflow-y: scroll;
-    height: 100vh;
-    padding: 1em;
+.add_book_main_container {    
+    height: 94.3vh;
     color: var(--color_font);
+    overflow: auto;
     background-color: var(--background_color);
 }
 
+.add_book_main_container::-webkit-scrollbar {
+    display: none;
+}
 
-.add_book_main_container form {
+.add_book_main_container form{
     display: flex;
     flex-direction: column;
     gap: 1em;
     width: 100%;
+    padding: 1em;
+    overflow: auto;
 }
 
 .input_file {

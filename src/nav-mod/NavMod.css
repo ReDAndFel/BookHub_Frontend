@@ -1,45 +1,39 @@
-.nav {
+.nav_mod {
     background-color: var(--nav_color);
     position: fixed;
     width: 100vw;
     bottom: 0;
-    padding: 0.3em;
+    padding: 0.6em;
     display: grid;
     grid-template-columns: repeat(3,1fr);
     justify-content: center;
     align-items: center;
 }
-.group_icon_nav{
+.group_icon_nav_mod{
     display: flex;
-    justify-content: space-around;
-        
+    justify-content: space-around;   
 }
-.group_icon_nav a{
+.group_icon_nav_mod a{
     text-decoration: none;
 }
-
-.icon_nav_container {
+.icon_nav_mod_container {
     color: var(--color_font);
     text-decoration: none;  
     display: flex;
     flex-direction: column;        
 }
 
-.icon_nav{
+.icon_nav_mod{
     font-size: 1.5em;
 }
 
-.text_icon_nav{
+.text_icon_nav_mod{
     font-size: 0.7em;
+    
 }
 
-.icon_nav_container:hover,
-.icon_nav_container:focus {
+.icon_nav_mod_container:hover,
+.icon_nav_mod_container:focus {
     color: var(--primary_color);
     cursor: pointer;
-}
-
-.plus{
-    color: var(--primary_color);
-    font-size: 3em;
 }

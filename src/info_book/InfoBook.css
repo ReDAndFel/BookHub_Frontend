@@ -1,12 +1,16 @@
 .info_book_container{
     background-color: var(--background_color); 
-    height: 95.3vh;
-    overflow-y: scroll;
+    height: 94.3vh;
+    overflow: auto;
     color: var(--color_font);
     display:flex;
     flex-direction: column; 
     gap: 1em;
     padding: 1em;
+}
+
+.info_book_container::-webkit-scrollbar {
+    display: none;
 }
 .info_sup{
     display: flex;

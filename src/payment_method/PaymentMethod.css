@@ -1,5 +1,5 @@
 .payment_method_container {
-    height: 95.3vh;
+    height: 94.3vh;
     background-color: var(--background_color);
     display: flex;
     flex-direction: column;
@@ -11,9 +11,11 @@
     display: flex;
     flex-direction: column;
     gap: 0.5em;
-    overflow-y: scroll;
+    overflow: auto;
 }
-
+.payment_methods_container::-webkit-scrollbar {
+    display: none;
+}
 .button_payment_method {
     background-color: var(--primary_color);
     color: var(--secundary_color);

@@ -1,20 +1,23 @@
-.friends_container{
-    background-color: var(--background_color); 
-    height: 95.3vh;
+.friends_container {
+    background-color: var(--background_color);
+    height: 94.3vh;
     overflow: hidden;
-    color: var(--color_font);   
-    display:flex;
-    flex-direction: column; 
+    color: var(--color_font);
+    display: flex;
+    flex-direction: column;
     gap: 1em;
     padding: 1em;
 }
 
-.friends_list_container{
+.friends_list_container {
     display: flex;
     flex-direction: column;
-    overflow-y: scroll;
+    overflow: auto;
     gap: 0.5em;
 }
-.icon_add_friend{
+.friends_list_container::-webkit-scrollbar {
+    display: none;
+}
+.icon_add_friend {
     width: 7em;
 }
