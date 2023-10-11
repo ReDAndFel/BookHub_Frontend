@@ -1,17 +1,24 @@
 import { useState } from "react";
 import './Searcher.css'
+import { useNavigate } from "react-router-dom";
 
 export default function Searcher({placeholder}) {
 
     const [search, setSearch] = useState('');
+    const navigate = useNavigate();
 
     const handleChange = (e) => {
         
         setSearch(e.target.value);
     }
 
+    const handleSubmit = () => {
+        
+        navigate(`/Search/Titulo/${search}`);
+    }
+
     return(
-        <form onSubmit={e => e.preventDefault()} className="searcher">
+        <form onSubmit={handleSubmit} className="searcher">
             <input className="textfield" type="text" placeholder={placeholder} name="search" id="search" value={search} onChange={handleChange} autoComplete="off" />
         </form>
     );

@@ -1,6 +1,5 @@
 import Nav from "../nav/Nav";
 import Header from "../header/Header";
-import Searcher from "../searcher/Searcher";
 import './Categories.css'
 import { useNavigate } from "react-router-dom";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
@@ -10,15 +9,13 @@ export default function Categories() {
 
     const navigate = useNavigate();
     const handleClick = (category) => {
-        navigate(`/Inicio/Categoria/${category}`)
+        navigate(`/Search/Categoria/${category}`);
     }
 
     return (
         <>
             <Header goBack = {false} > Categorias </Header>
             <div className='categories_container'>
-                <Searcher />
-
                 <div className="categories_item" id="horror" onClick={() => handleClick('Terror')}>
                     <FontAwesomeIcon icon={faSkull} />
                     Terror

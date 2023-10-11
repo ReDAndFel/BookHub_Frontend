@@ -1,6 +1,6 @@
-.home_container{
+.search_container{
     background-color: var(--background_color); 
-    height: 91vh;
+    height: 95.3vh;
     overflow: hidden;
     color: var(--color_font);   
     display:flex;
@@ -8,9 +8,4 @@
     gap: 1em;
     padding: 1em;
     
-}
-
-.home_container h1{
-    color: var(--primary_color);
-    text-align: center;
 }

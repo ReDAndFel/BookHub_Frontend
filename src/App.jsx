@@ -14,6 +14,7 @@ import Favorites from './favorites/Favorites';
 import PaymentMethod from './payment_method/PaymentMethod';
 import AddFriends from './add_friend/AddFriends';
 import InfoBook from './info_book/InfoBook';
+import Search from './search/Search';
 
 
 
@@ -34,7 +35,7 @@ function App() {
         <Route path='/Amigos/:idUser' element={<Friends />} />
         <Route path='/Favoritos/:idUser' element={<Favorites />} />
         <Route path='/Agregar_amigo/:idUser' element={<AddFriends />} />
-        <Route path='/Inicio/Categoria/:category' element={<Home />} />
+        <Route path='/Search/:filter/:value' element={<Search />} />
         <Route path='/Info_Libro/:idBook' element={<InfoBook />} />
         
       </Routes>      

@@ -5,6 +5,7 @@ import './Library.css'
 import Nav from "../nav/Nav";
 import Header from "../header/Header";
 import ListBook from "../list_book/ListBook";
+import SortButton from "../sort_button/SortButton";
 
 export default function Library() {
 
@@ -14,6 +15,7 @@ export default function Library() {
             <Header goBack >Librería</Header>
             <div className="library_container">
                 <Searcher placeholder="Buscar..." />
+                <SortButton />
                 <ListBook />
             </div>
         </>
