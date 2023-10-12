@@ -18,6 +18,7 @@ export const useBook = () => {
 
     const [book, setBook] = useState(bookInitial);
     const [isFavorite, setIsFavorite] = useState(false);
+    const [isBought, setIsBought] = useState(false);
 
     const handleAddCart = () => {
 
@@ -34,6 +35,16 @@ export const useBook = () => {
     const handleFavorite = () => {
         setIsFavorite(!isFavorite);
     }
+   
+    const getBoughtState = (idBook) => {
+        let state = false //funcion de obtener el estado de compra del libro
+        setIsBought(state);
+    }
+    const getFavoriteState = (idBook) => {
+        let state = false //funcion de obtener el estado de favorito de un libro
+        setIsFavorite(state);
+    }
+
 
     const handleChangeBook = (e) => {
         const { name, value } = e.target;
@@ -60,8 +71,10 @@ export const useBook = () => {
             sinopsis: 'El Principito es una narración corta del escritor francés Antoine de Saint-Exupéry. La historia se centra en un pequeño  príncipe que realiza una travesía por el universo. En este viaje descubre la extraña forma en que los adultos ven la vida y comprende el valor del amor y la amistad.',
         }
         console.log(bookFound)
-        setBook(bookFound)        
+        setBook(bookFound)    
+        getBoughtState(bookFound.id)
+        getFavoriteState(bookFound.id);
     }
 
-    return { book,isFavorite,handleAddCart, handleLogin, handleRead, handleFavorite, handleChangeBook,handleChangeAvailable,loadBook};
+    return { book,isFavorite,isBought,handleAddCart, handleLogin, handleRead, handleFavorite, handleChangeBook,handleChangeAvailable,loadBook};
 }

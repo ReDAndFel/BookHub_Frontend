@@ -10,59 +10,46 @@ import ListReviews from '../list_reviews/ListReviews';
 import { useEffect, useState } from 'react';
 import { useBook } from "../hooks/useBook";
 import AddReview from '../add_review/AddReview';
+import { useUser } from '../hooks/useUser';
+import { useAuth } from '../AuthContext';
+
+
+const userInitial = {
+    id: '12341',
+    username: 'Maria',
+    email: 'maria@qweqw',
+    password: '',
+    confirmPassword: '',
+    firstName:'Maria',
+    lastName: 'Cardona',
+    phone: '32312412',
+    address: 'Calle 12-30',
+    rol:'USER'
+}
 
 export default function InfoBook() {
 
     let { idBook } = useParams();
-    const [idUser,setIdUser] = useState('');
-
-    const navigate = useNavigate();
+    const [idUser,setIdUser] = useState('');    
     const [isLoged, setIsLoged] = useState(false);
-    const [isBought, setIsBought] = useState(false);
-    const [isMod, setIsMod] = useState(false);
-    const { book,isFavorite,handleAddCart, handleLogin, handleRead, handleFavorite, handleChangeBook,handleChangeAvailable, loadBook } = useBook();
 
-   
+    const { book,isFavorite,isBought,handleAddCart, handleLogin, handleRead, handleFavorite, handleChangeBook,handleChangeAvailable, loadBook } = useBook();
+    const {isMod,validateMod} = useUser();
+    const { token } = useAuth();
+
+    const navigate = useNavigate();   
 
     useEffect(() => {        
         
-        loadBook(idBook)
+        loadBook(idBook)  
 
-        const userIsLoggedIn = true;
-
-        if (userIsLoggedIn) {
-            setIsLoged(true);
-            setIdUser("1004684293");
-        }
+        if(token.idUser != "") {
+            setIdUser(token.idUser);
+            setIsLoged(true)
+            validateMod(token.rol)
+        }   
 
     }, [])
-
-    useEffect(() => {
-        const userIsMod = false;
-
-        if (userIsMod) {
-            setIsMod(true);
-        }
-
-    }, [isLoged])
-
-    useEffect(() => {
-        const bookIsBought = false;
-
-        if (bookIsBought) {
-            setIsBought(true);
-        }
-
-    }, [isLoged])
-
-    useEffect(() => {
-        const bookIsFavorite = false;
-
-        if (bookIsFavorite) {
-            setIsFavorite(true);
-        }
-
-    }, [isLoged])
 
     return (
         <>

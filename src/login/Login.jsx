@@ -1,4 +1,3 @@
-import { useNavigate } from "react-router-dom";
 import { NavLink } from "react-router-dom";
 import { useForm } from "../hooks/useForm";
 import ButtonSubmit from "../button_submit/ButtonSubmit";
@@ -6,6 +5,7 @@ import './Login.css';
 import { faEnvelope } from "@fortawesome/free-regular-svg-icons";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faLock } from "@fortawesome/free-solid-svg-icons";
+import { useSesion } from "../hooks/useSesion";
 
 const initialForm = {
     email: "",
@@ -26,14 +26,14 @@ const validationsForm = (form) => {
 export default function Login() {
 
     const { form, errors,setErrors, handleChange, handleBlur } = useForm(initialForm, validationsForm);
-    const navigate = useNavigate();
+    const {handleLogin} = useSesion()
+   
 
     const handleSubmit = (e) => {
         e.preventDefault();
         setErrors(validationsForm(form));
         if (Object.keys(errors).length === 0) {
-            console.log(form);
-            navigate('/Inicio');
+            handleLogin(form);
         }
     };
 
@@ -52,7 +52,7 @@ export default function Login() {
                     <input type='password' placeholder="Contraseña" name='password' id='password' value={form.password} onChange={handleChange} onBlur={handleBlur} autoComplete="off" required />
                     {errors.password && <p>{errors.password}</p>}
                 </div>
-                <ButtonSubmit>Iniciar Sesion</ButtonSubmit>
+                <ButtonSubmit >Iniciar Sesion</ButtonSubmit>
             </form>
             <p className="link_to_register">¿No tienes una cuenta?<NavLink to='/Signup'>    Registrate</NavLink></p>
         </div>

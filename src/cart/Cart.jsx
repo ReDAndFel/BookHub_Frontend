@@ -4,9 +4,12 @@ import Header from "../header/Header";
 import Nav from "../nav/Nav";
 import './Cart.css'
 import Button from "../button/Button";
+import { useAuth } from "../AuthContext";
+import { useNavigate } from "react-router-dom";
 
 export default function Cart() {
     const [totalPrice, setTotalPrice] = useState(0);
+    const navigate = useNavigate();
 
     const listBooksInitial = [
         {
@@ -34,6 +37,21 @@ export default function Cart() {
     const [listBooksSelected, setListBooksSelected] = useState([]);
     const [listBooks, setListBooks] = useState(listBooksInitial);
 
+    const [idUser, setIdUser] = useState('');
+    const [isLoged, setIsLoged] = useState(false);
+
+
+    const { token } = useAuth();
+
+    useEffect(() => {
+
+        if (token.idUser != "") {
+            setIdUser(token.idUser);
+            setIsLoged(true)
+        }
+
+    }, [])
+
     useEffect(() => {
         const total = listBooks.reduce((sum, book) => sum + book.price, 0);
         setTotalPrice(total);
@@ -55,17 +73,25 @@ export default function Cart() {
         <>
             <Header>Mi Carrito</Header>
             {listBooksSelected.length > 0 && <div className="button_cart_delete"><Button handlerClick={handleDelete}>Quitar Libro</Button></div>}
-            <div className='cart_container'>
-                <div className="cart_list_books">
-                    {
-                        listBooks.map((book) => <BookItem key={book.id} list={listBooksSelected} setList={setListBooksSelected} image={book.image} title={book.title} price={book.price}></BookItem>)
-                    }
+
+            {isLoged ? (
+                <div className='cart_container'>
+
+                    <div className="cart_list_books">
+                        {
+                            listBooks.map((book) => <BookItem key={book.id} list={listBooksSelected} setList={setListBooksSelected} image={book.image} title={book.title} price={book.price}></BookItem>)
+                        }
+                    </div>
+                    <div className="confirm_cart">
+                        <span> Precio total: $ {totalPrice}</span>
+                        <Button handlerClick={handleConfirmBuy}>Confirmar Compra ({listBooks.length})</Button>
+                    </div>
                 </div>
-                <div className="confirm_cart">
-                    <span> Precio total: $ {totalPrice}</span>
-                    <Button handlerClick={handleConfirmBuy}>Confirmar Compra ({listBooks.length})</Button>
+            ) : (
+                <div className='cart_container'>
+                    <Button handlerClick={() => navigate('/Login')}>Iniciar Sesion</Button>
                 </div>
-            </div>
+            )}
             <Nav />
         </>
 

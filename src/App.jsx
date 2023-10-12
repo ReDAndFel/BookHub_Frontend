@@ -15,12 +15,14 @@ import PaymentMethod from './payment_method/PaymentMethod';
 import AddFriends from './add_friend/AddFriends';
 import InfoBook from './info_book/InfoBook';
 import Search from './search/Search';
+import { AuthProvider } from './AuthContext';
 
 
 
 function App() {
   return (
-    <div className='main_container'>
+    <AuthProvider>
+      <div className='main_container'>
       <Routes className='routes_container'>
         <Route path='/' element={<Login />} />
         <Route path='/Inicio' element={<Home />} />
@@ -40,6 +42,8 @@ function App() {
         
       </Routes>      
     </div>
+    </AuthProvider>
+    
   )
 }
 

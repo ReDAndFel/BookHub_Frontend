@@ -1,31 +1,15 @@
-import { useState } from 'react';
+
 import './AddReview.css'
-import ButtonSubmit from '../button_submit/ButtonSubmit';
 
-const reviewInitial = {
-    idUser: '',
-    idBook: '',
-    puntuation: 0,
-    review: ''
-}
+import { useReview } from '../hooks/useReview';
+import Button from '../button/Button';
 
-export default function AddReview({idUser,idBook}) {
+export default function AddReview({ idUser, idBook }) {
 
-    const [review, setReview] = useState(reviewInitial);
+    const { review, handleChangeReview, handleAddReview } = useReview()
 
-    const handleChangeReview = (e) => {
-        const { name, value } = e.target;
-        setReview({ ...review, [name]: value });
-    }
-
-    const handleSubmitReview = (e) => {
-        e.preventDefault();
-        review.idBook = idBook;
-        review.idUser = idUser;
-        console.log(review);
-    }
     return (
-        <form className='form_review' onSubmit={handleSubmitReview}>
+        <form className='form_review'>
             <span>Escribe una Reseña</span>
             <textarea name="review" id="textarea_review" value={review.review} onChange={handleChangeReview} ></textarea>
             <span>Puntuacion:</span>
@@ -36,7 +20,7 @@ export default function AddReview({idUser,idBook}) {
                 <option value={4}>4</option>
                 <option value={5}>5</option>
             </select>
-            <ButtonSubmit>Publicar Reseña</ButtonSubmit>
+            <Button handlerClick={() => handleAddReview(idBook, idUser)}>Publicar Reseña</Button>
         </form>
     );
 }
