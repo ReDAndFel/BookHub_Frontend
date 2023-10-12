@@ -32,8 +32,8 @@ const validationsForm = (form) => {
     if (form.synopsis === '') {
         errors.synopsis = 'El campo "sinopsis" es requerido'
     }
-    if (form.categogy === '') {
-        errors.categogy = 'El campo "categoria" es requerido'
+    if (form.category === '') {
+        errors.category = 'El campo "categoria" es requerido'
     }
     if (form.availability === '') {
         errors.availability = 'El campo "disponibilidad" es requerido'
@@ -90,7 +90,7 @@ export default function AddLibro(e) {
                     </div>
 
                     <div className='combo_box_book'>
-                        <select name="category" id="category" value={form.categogy} onChange={handleChange} onBlur={handleBlur} required>
+                        <select name="category" id="category" value={form.category} onChange={handleChange} onBlur={handleBlur} required>
                             <option value=''>Selecciona una Categoría</option>
                             <option value="Terror">Terror</option>
                             <option value="Educacion">Educacion</option>

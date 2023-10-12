@@ -1,8 +1,8 @@
-import './Button.css'
+import '../button/Button.css'
 
 export default function ButtonSubmit ({children}){
     return(
-        <input className='button_container' type='submit' value={children} />
+        <input className='button' type='submit' value={children} />
     );
 
 }
