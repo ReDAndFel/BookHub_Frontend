@@ -20,8 +20,7 @@ export default function InfoBook() {
     const [isLoged, setIsLoged] = useState(false);
     const [isBought, setIsBought] = useState(false);
     const [isMod, setIsMod] = useState(false);
-    const [isFavorite, setIsFavorite] = useState(false);
-    const { book,handleAddCart, handleLogin, handleRead, handleFavorite, handleChangeBook,handleChangeAvailable, loadBook } = useBook();
+    const { book,isFavorite,handleAddCart, handleLogin, handleRead, handleFavorite, handleChangeBook,handleChangeAvailable, loadBook } = useBook();
 
    
 

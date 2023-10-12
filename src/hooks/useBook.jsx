@@ -17,6 +17,7 @@ export const useBook = () => {
     }
 
     const [book, setBook] = useState(bookInitial);
+    const [isFavorite, setIsFavorite] = useState(false);
 
     const handleAddCart = () => {
 
@@ -62,5 +63,5 @@ export const useBook = () => {
         setBook(bookFound)        
     }
 
-    return { book,handleAddCart, handleLogin, handleRead, handleFavorite, handleChangeBook,handleChangeAvailable,loadBook};
+    return { book,isFavorite,handleAddCart, handleLogin, handleRead, handleFavorite, handleChangeBook,handleChangeAvailable,loadBook};
 }
