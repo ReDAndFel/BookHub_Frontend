@@ -1,0 +1,45 @@
+.info_user_container{
+    background-color: var(--background_color);
+    height: 94.3vh;
+    overflow: hidden;
+    color: var(--color_font);
+    display: flex;
+    flex-direction: column;
+    gap: 1em;
+    padding: 1em;
+}
+.info_user_container form{
+    display: flex;
+    flex-direction: column;
+    gap: 2em;    
+    width: 100%;
+}
+.texfield_update_info{
+    display: flex;
+    justify-content: space-between;
+    flex-wrap: wrap;
+    font-size: 0.8em;
+    color: var(--color_font);
+    width: 100%; 
+}
+.texfield_update_info span{
+    width: 30%;
+}
+
+.texfield_update_info p{
+    font-size: 0.7em;
+    color: var(--secundary_color); 
+}
+
+.texfield_update_info input{
+    padding: 0 0 0 0.5em;
+    font-size: 0.9em;
+    border: none;
+    outline: none;
+    border-bottom: 2px solid var(--color_font);  
+    border-radius: 0.7em;
+    width: 70%;
+    background-color: transparent;
+    color: var(--color_font);
+    
+ }

@@ -16,6 +16,8 @@ import AddFriends from './add_friend/AddFriends';
 import InfoBook from './info_book/InfoBook';
 import Search from './search/Search';
 import { AuthProvider } from './AuthContext';
+import Profile from './profile/Profile';
+import UpdateUser from './update_info_user/UpdateUser';
 
 
 
@@ -36,9 +38,11 @@ function App() {
         <Route path='/Metodos_de_pago/:idUser' element={<PaymentMethod />} />
         <Route path='/Amigos/:idUser' element={<Friends />} />
         <Route path='/Favoritos/:idUser' element={<Favorites />} />
-        <Route path='/Agregar_amigo/:idUser' element={<AddFriends />} />
+        <Route path='/Nuevos_amigos' element={<AddFriends />} />
         <Route path='/Search/:filter/:value' element={<Search />} />
         <Route path='/Info_Libro/:idBook' element={<InfoBook />} />
+        <Route path='/Perfil/:idUser' element={<Profile />} />
+        <Route path='/Actualizar_informacion' element={<UpdateUser />} />
         
       </Routes>      
     </div>

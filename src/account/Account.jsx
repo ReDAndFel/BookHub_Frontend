@@ -39,7 +39,7 @@ export default function Account() {
         isLoged ? (
             <>        
             <Header>
-                <div className="account_user_profile" id="Perfil">
+                <div className="account_user_profile" id="Perfil" onClick={handleClick}>
                     <FontAwesomeIcon className="icon_account" icon={faCircleUser} />
                     <h2>{username}</h2>
                 </div>

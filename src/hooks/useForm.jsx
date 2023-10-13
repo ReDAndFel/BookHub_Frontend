@@ -26,6 +26,6 @@ export const useForm = (initialForm, validationsForm) => {
     }
 
     return {
-        form, cleanForm, errors, handleChange, handleSelectImage, handleBlur, setErrors
+        form, cleanForm, errors,setForm, handleChange, handleSelectImage, handleBlur, setErrors
     };
 }
