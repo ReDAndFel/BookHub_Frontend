@@ -14,8 +14,7 @@ export default function Friends() {
     const { listUsers, getFriends } = useUser();
 
     const [idUser, setIdUser] = useState('');
-    const [isLoged, setIsLoged] = useState(false);
-
+   
     const navigate = useNavigate();
 
     const handlerAddFriend = () => {
