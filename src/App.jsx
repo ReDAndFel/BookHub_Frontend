@@ -18,7 +18,8 @@ import Search from './search/Search';
 import { AuthProvider } from './AuthContext';
 import Profile from './profile/Profile';
 import UpdateUser from './update_info_user/UpdateUser';
-import AddPaymentMethod from './add_payment_method/AddPaymentMethod';
+import AddPaymentMethod from './info_payment_method/AddPaymentMethod';
+
 
 
 
@@ -44,7 +45,8 @@ function App() {
         <Route path='/Info_Libro/:idBook' element={<InfoBook />} />
         <Route path='/Perfil/:idUser' element={<Profile />} />
         <Route path='/Actualizar_informacion' element={<UpdateUser />} />
-        <Route path='/Nuevo_metodo_de_pago' element={<AddPaymentMethod />} />
+        <Route path='/Info_metodo_de_pago/:idPaymentMethod' element={<AddPaymentMethod />} />
+        <Route path='/Info_metodo_de_pago/' element={<AddPaymentMethod />} />
         
         
       </Routes>      

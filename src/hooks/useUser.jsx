@@ -26,7 +26,7 @@ export const useUser = () => {
         console.log(formSignin)
     }
 
-    const getUsers = (idUser) => {
+    const getUsers = () => {
         let listUsers = [
             {
                 idUser: '4',
@@ -97,7 +97,7 @@ export const useUser = () => {
         if (rol == "MODERATOR") setIsMod(true)
     }
 
-    const handlerAddFriend = (idUserToken) => {
+    const handlerAddFriend = (idUserToken,idUser) => {
         if (isFriend) {
             console.log(`El usuario ${user.username} fue eliminado de la lista de amigos del usuario con id ${idUserToken}`)
         } else {
@@ -108,7 +108,7 @@ export const useUser = () => {
 
     const handleUpdateUser = (idUserToken, updatedUser) => {
         console.log(`Se actualizó el usuario con el id ${idUserToken}`)
-        setUser(updatedUser); // metodo de iniciar sesion y obtener el token
+        setUser(updatedUser); // metodo de actualizar usuario
         console.log(updatedUser)
     }
 

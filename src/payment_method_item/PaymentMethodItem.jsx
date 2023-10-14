@@ -6,7 +6,7 @@ import { useNavigate } from 'react-router-dom';
 export default function PaymentMethodItem({ idPaymentMethod,cardNumer,handleClickDelete }) {
 
     const handleClick = () => {
-        navigate(`/Metodo_de_pago/${idPaymentMethod}`);
+        navigate(`/Info_metodo_de_pago/${idPaymentMethod}`);
     }
 
     const navigate = useNavigate();  

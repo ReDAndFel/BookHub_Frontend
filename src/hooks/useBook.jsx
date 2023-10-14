@@ -1,4 +1,5 @@
 import { useState } from "react";
+import { useNavigate } from "react-router-dom";
 
 export const useBook = () => {
 
@@ -7,6 +8,7 @@ export const useBook = () => {
         image: '',
         title: '',
         autor: '',
+        editorial:'',
         realeaseDate: '',
         puntuation: 0,
         reviews: 0,
@@ -14,11 +16,14 @@ export const useBook = () => {
         available: false,
         category: '',
         sinopsis: '',
+        file:''
     }
 
     const [book, setBook] = useState(bookInitial);
     const [isFavorite, setIsFavorite] = useState(false);
     const [isBought, setIsBought] = useState(false);
+
+    const navigate = useNavigate();
 
     const handleAddCart = () => {
 

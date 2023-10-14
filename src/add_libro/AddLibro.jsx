@@ -49,7 +49,7 @@ export default function AddLibro(e) {
 
     const { isMod, validateMod } = useUser();
     const { token } = useAuth();
-    const { form, errors, setErrors, handleChange, handleBlur } = useForm(initialForm, validationsForm);
+    const { form, errors, setErrors, handleChange, handleBlur, cleanForm } = useForm(initialForm, validationsForm);
 
     const [idUser, setIdUser] = useState('');
     const [isLoged, setIsLoged] = useState(false);
@@ -62,6 +62,7 @@ export default function AddLibro(e) {
         if (Object.keys(errors).length === 0) {
             console.log(form);
             navigate('/Inicio');
+
         }
     }
 
@@ -135,9 +136,7 @@ export default function AddLibro(e) {
                             <label className={`label_file ${form.file != '' && 'selected'}`} htmlFor="file"> Subir Archivo Libro</label>
                             <input className={`input_file ${form.file != '' && 'selected'}`} type='file' name='file' id='file' onChange={handleChange} required />
                         </div>
-
                         <ButtonSubmit>Publicar Libro</ButtonSubmit>
-
                     </form>
                 ) : (
                     <Button handlerClick={() => navigate('/Login')}>Iniciar Sesion</Button>

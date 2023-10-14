@@ -18,7 +18,7 @@ export default function PaymentMethod() {
     const navigate = useNavigate();   
 
     const handleClickAddPaymentMethod = () =>{
-       navigate('/Nuevo_metodo_de_pago')
+       navigate('/Info_metodo_de_pago/')
     }
 
     const handleClickDeletePaymentMethod = (idPaymenMethod) =>{

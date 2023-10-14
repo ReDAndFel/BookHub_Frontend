@@ -14,16 +14,14 @@ export const usePaymentMethod = () => {
     const [listPaymentMethods, setListPaymentMethods] = useState([]);
 
     const handleAddPaymentMethod = (idUser, formPaymentMethod) => {
-        let listPaymentMethodAux = [ ...listPaymentMethods ]
-        let newPaymentMethod = { ...formPaymentMethod };
-        listPaymentMethodAux.push(newPaymentMethod)
-        setPaymentMethod(newPaymentMethod) // metodo para crear el metodo de pago
-        setListPaymentMethods(listPaymentMethodAux); // metodo para agregarlo a la lista
-        console.log(`Se agregó el metodo de pago ${formPaymentMethod} en la lista de metodos de pago de ${idUser}`)
-        console.log(listPaymentMethodAux)
+        let newPaymentMethod={...formPaymentMethod}
+        newPaymentMethod.idUser = idUser
+        console.log(`Se agregó el siguiente metodo de pago en los metodos de pago del usuario con id ${idUser}`)// metodo para agregar metodo de pago
+        console.log(newPaymentMethod)
+        
     }
 
-    const handleDeletePaymentMethod = (idUser, idPaymentMethod) => {
+    const handleDeletePaymentMethod = (idPaymentMethod) => {
         console.log(`id del metodo a eliminar es ${idPaymentMethod}`)
         let listPaymentMethodAux = [ ...listPaymentMethods ]
         console.log(`lista antes`)
@@ -31,8 +29,8 @@ export const usePaymentMethod = () => {
         listPaymentMethodAux = listPaymentMethodAux.filter(paymentMethod => paymentMethod.id !== idPaymentMethod);
         console.log(`lista despues`)
         console.log(listPaymentMethodAux)
-        setListPaymentMethods(listPaymentMethodAux); // metodo para agregarlo a la lista
-        console.log(`Se quitó el metodo de pago ${idPaymentMethod} en la lista de metodos de pago de ${idUser}`)
+        setListPaymentMethods(listPaymentMethodAux); // metodo para quitar de la lista a la lista
+        console.log(`Se quitó el metodo de pago ${idPaymentMethod}`)
     }
 
     const getPaymentMethods = (idUser) => {
@@ -64,6 +62,35 @@ export const usePaymentMethod = () => {
         setListPaymentMethods(listPaymentMethod);
     }
 
-    return { listPaymentMethods, getPaymentMethods, handleDeletePaymentMethod, handleAddPaymentMethod, paymentMethod }
+    const getPaymentMethod = (idUser) => {
+        let paymentMethod =   {
+                id: '1',
+                cardNumber: '10012412',
+                surname: 'Andres Felipe',
+                expeditionDate: '10-10-2026',
+                cvv: '123',
+                idUser: '1004684293'
+            } //metodo para obtener un metodo de pago
+        setPaymentMethod(paymentMethod);
+    }
+
+    const handleUpdatePaymentMethod = (idPaymentMethod, updatedPaymentMethod) =>{
+        console.log(`Se actualizó el metodo de pago con el id ${idPaymentMethod}`)
+        setPaymentMethod(updatedPaymentMethod); // metodo de actualizar metodo de pago
+        console.log(updatedPaymentMethod)
+    }
+    const loadPaymentMethod = (idPaymentMethod) =>{
+        let paymentMethodAux = {
+            id: '1',
+            cardNumber: '50123012',
+            surname: 'Andres Felipe',
+            expeditionDate: '2023-10-10',
+            cvv: '123',
+            idUser: '1004684293'
+        } //metodo para obtener paymentMethod por id
+        setPaymentMethod(paymentMethodAux); // metodo de actualizar metodo de pago
+        console.log(paymentMethodAux)
+    }
+    return { listPaymentMethods, getPaymentMethods,loadPaymentMethod,getPaymentMethod,handleUpdatePaymentMethod, handleDeletePaymentMethod, handleAddPaymentMethod, paymentMethod }
 
 }
