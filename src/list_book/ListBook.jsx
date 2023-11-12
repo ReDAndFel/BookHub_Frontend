@@ -12,13 +12,13 @@ export default function ListBook({ list }) {
     if (!list) {
         // Puedes mostrar un mensaje o un indicador de carga aquí
         return <p>Loading...</p>;
-      }
+    }
 
     return (
         <div className="list_book_container">
             {list.map((book) => (
                 <div key={book.id} className="book_container" onClick={() => handlerClickCard(book.id)}>
-                    <CardBook image={book.image} price={book.price} title={book.title} />
+                    <CardBook image={book.image.url} price={book.price} title={book.title} />
                 </div>
             ))}
         </div>

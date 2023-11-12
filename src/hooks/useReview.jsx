@@ -7,7 +7,8 @@ const reviewDto = {
     review: ''
 }
 
-export const useReview = () =>{
+export const useReview = () => {
+    const apiUrl = "http://localhost:8080/api/resenia"
     const [review, setReview] = useState(reviewDto);
     const [reviewListBook, setReviewListBook] = useState([]);
 
@@ -17,46 +18,29 @@ export const useReview = () =>{
     }
 
     const handleAddReview = (idBook, idUser) => {
-        let newReview =  {...review}
+        let newReview = { ...review }
         newReview.idBook = idBook;
         newReview.idUser = idUser;
         console.log(newReview); //funcion de agregar en la base de datos la funcion
     }
 
-    const getReviewsBook = (idBook) =>{
-        
-        const listReviews = [
-            {
-                id: 1,
-                username: 'Mario0123',
-                date: '10-02-2022',
-                puntuation: 5,
-                review: 'Buen libro'
-            },
-            {
-                id: 2,
-                username: 'Alex123',
-                date: '10-04-2022',
-                puntuation: 4,
-                review: 'Muy buena trama, pero podria ser mejor'
-            },
-            {
-                id: 3,
-                username: 'Maria',
-                date: '10-04-2022',
-                puntuation: 1,
-                review: 'Aburridisimo.'
-            },
-            {
-                id: 4,
-                username: 'Marsha11',
-                date: '10-10-2022',
-                puntuation: 5,
-                review: 'Una obra de arte'
-            },    
-        ] //funcion de busqueda de reviews por idBook
-        setReviewListBook(listReviews)
+    const getReviewsBook = (idBook) => {
+
+        fetch(`${apiUrl}/obtener_resenias_libro/${idBook}`)
+            .then(response => {
+                if (!response.ok) {
+                    throw new Error(`HTTP error! Status: ${response.status}`);
+                }
+                return response.json();
+            })
+            .then(data => {
+                console.log(data.response)
+                setReviewListBook(data.response)
+            })
+            .catch(error => {
+                console.error('Error en la solicitud http:', error);
+            });
     }
 
-    return{review,reviewListBook,handleChangeReview,handleAddReview,getReviewsBook}
+    return { review, reviewListBook, handleChangeReview, handleAddReview, getReviewsBook }
 } 

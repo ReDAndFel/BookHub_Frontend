@@ -33,7 +33,7 @@ export default function InfoBook() {
     const [idUser,setIdUser] = useState('');    
     const [isLoged, setIsLoged] = useState(false);
 
-    const { book,isFavorite,isBought,handleAddCart, handleLogin, handleRead, handleFavorite, handleChangeBook,handleChangeAvailable, loadBook } = useBook();
+    const { book,isFavorite,isBought,handleAddCart, handleLogin, handleRead, handleFavorite, handleChangeBook,handleChangeAvailable, getBook } = useBook();
     const {isMod,validateMod} = useUser();
     const { token } = useAuth();
 
@@ -41,7 +41,7 @@ export default function InfoBook() {
 
     useEffect(() => {        
         
-        loadBook(idBook)  
+        getBook(idBook)  
 
         if(token.idUser != "") {
             setIdUser(token.idUser);
@@ -57,7 +57,7 @@ export default function InfoBook() {
 
             <div className='info_book_container'>
                 <div className='info_sup'>
-                    <img src={book.image} alt={`${book.title}_portada`} />
+                    <img src={book.image.url} alt={`${book.title}_portada`} />
                     <div className='info_book'>
                         <h1>{book.title}</h1>
                         <span>{book.autor}</span>
