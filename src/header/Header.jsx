@@ -3,12 +3,12 @@ import './Header.css'
 import { faChevronLeft } from '@fortawesome/free-solid-svg-icons';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 
-export default function Header({children ,goBack}) {
+export default function Header({children ,goBack, goBackNavigate}) {
 
     const navigate = useNavigate();
     
     const handlerClick = () =>{
-        navigate(-1);
+        navigate(goBackNavigate)
     }
 
     return (

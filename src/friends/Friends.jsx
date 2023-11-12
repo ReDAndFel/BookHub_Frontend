@@ -32,7 +32,7 @@ export default function Friends() {
 
     return (
         <>
-            <Header goBack> Mis Amigos</Header>
+            <Header goBack goBackNavigate={"/Cuenta"}> Mis Amigos</Header>
             <div className='friends_container'>
                 <Searcher placeholder={'Buscar amigo...'} />
 

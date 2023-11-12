@@ -20,7 +20,7 @@ export default function Favorites() {
     ];
     return (
         <>
-            <Header goBack> Mis Favoritos</Header>
+            <Header goBack goBackNavigate={"/Cuenta"}> Mis Favoritos</Header>
             <div className='favorites_container'>
                 <Searcher placeholder="Buscar..." />
                 <SortButton />

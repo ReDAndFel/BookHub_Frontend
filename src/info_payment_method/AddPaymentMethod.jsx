@@ -20,15 +20,15 @@ const validationsForm = (form) => {
     if (form.expeditionDate.trim() == '') {
         errors.expeditionDate = 'El campo "Fecha de Expedición" es requerido'
     }
-    if (form.cvv.trim() == '') {
-        errors.cvv = 'El campo "Cvv" es requerido'
+    if (!form.cvv || form.cvv.toString().trim() === '') {
+        errors.cvv = 'El campo "Cvv" es requerido';
     }
     return errors;
 };
 
 export default function AddPaymentMethod() {
 
-    const { handleAddPaymentMethod, handleUpdatePaymentMethod, paymentMethod, loadPaymentMethod } = usePaymentMethod();
+    const { handleAddPaymentMethod, handleUpdatePaymentMethod, paymentMethod, getPaymentMethod } = usePaymentMethod();
     const { form, errors, setErrors,setForm, handleChange, handleBlur } = useForm(paymentMethod, validationsForm);
     const { token } = useAuth();
     let { idPaymentMethod } = useParams();
@@ -42,13 +42,19 @@ export default function AddPaymentMethod() {
     const handleSubmit = (e) => {
         e.preventDefault();
         setErrors(validationsForm(form));
-        console.log(`Formulario que se va a mandar:`)
-        console.log(form)
         if (Object.keys(errors).length === 0) {
             if (!idPaymentMethod) {
-                handleAddPaymentMethod(idUser, form)
+                form.idUser = idUser
+                handleAddPaymentMethod(form)
+                console.log("En agregar")
+                console.log("El formulario fue: ")
+                console.log(form)
             } else {
                 handleUpdatePaymentMethod(idPaymentMethod, form)
+                console.log("En Actualizar")
+                console.log("El formulario fue: ")
+                console.log(form)
+
             }
             navigate(`/Metodos_de_pago/${idUser}`);
         }
@@ -60,21 +66,19 @@ export default function AddPaymentMethod() {
         if (token.idUser != "") {
             setIdUser(token.idUser);
             if (idPaymentMethod){
-                console.log('Condicional de idPayment en url!')
-                loadPaymentMethod(idPaymentMethod);
+                getPaymentMethod(idPaymentMethod);
             }
         }
 
     }, [])
 
     useEffect(() => {
-        console.log(paymentMethod)
         setForm(paymentMethod);
     }, [paymentMethod]);
 
     return (
         <>
-            <Header goBack>Información de metodo de pago</Header>
+            <Header goBack goBackNavigate={`/Metodos_de_pago/${idUser}`}>Información de metodo de pago</Header>
             <div className="add_payment_method_container">
                 <form onSubmit={handleSubmit}>
                     <div className='texfield_payment_method'>

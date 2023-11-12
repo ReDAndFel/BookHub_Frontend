@@ -234,6 +234,7 @@ export const useBook = () => {
                 return response.json();
             })
             .then(data => {
+                console.log(data.response)
                 setBook(data.response)
                 getBoughtState(idBook)
                 getFavoriteState(idBook);

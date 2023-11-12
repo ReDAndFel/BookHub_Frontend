@@ -53,7 +53,7 @@ export default function InfoBook() {
 
     return (
         <>
-            <Header goBack>Informacion del Libro</Header>
+            <Header goBack goBackNavigate={"/Inicio"}>Informacion del Libro</Header>
 
             <div className='info_book_container'>
                 <div className='info_sup'>
