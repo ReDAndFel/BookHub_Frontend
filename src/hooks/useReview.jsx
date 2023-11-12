@@ -10,12 +10,7 @@ const reviewDto = {
 export const useReview = () => {
     const apiUrl = "http://localhost:8080/api/resenia"
     const [review, setReview] = useState(reviewDto);
-    const [reviewListBook, setReviewListBook] = useState([]);
-
-    const handleChangeReview = (e) => {
-        const { name, value } = e.target;
-        setReview({ ...review, [name]: value });
-    }
+    const [reviewListBook, setReviewListBook] = useState([]);    
 
     const handleAddReview = (idBook, idUser) => {
         let newReview = { ...review }
@@ -42,5 +37,5 @@ export const useReview = () => {
             });
     }
 
-    return { review, reviewListBook, handleChangeReview, handleAddReview, getReviewsBook }
+    return { review, reviewListBook, handleAddReview, getReviewsBook }
 } 

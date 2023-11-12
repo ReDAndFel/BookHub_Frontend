@@ -7,14 +7,13 @@ export default function Searcher({placeholder}) {
     const [search, setSearch] = useState('');
     const navigate = useNavigate();
 
-    const handleChange = (e) => {
-        
+    const handleChange = (e) => {        
         setSearch(e.target.value);
     }
 
-    const handleSubmit = () => {
-        
-        navigate(`/Search/Titulo/${search}`);
+    const handleSubmit = (e) => {   
+        e.preventDefault();     
+        navigate(`/Search/${search}`);
     }
 
     return(

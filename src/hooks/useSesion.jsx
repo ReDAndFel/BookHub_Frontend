@@ -13,7 +13,7 @@ export const useSesion = () => {
     const [sesion, setSesion] = useState(sesionDto);
     const [isLoged, setIsLoged] = useState(false);
 
-    const { token,setToken } = useAuth();
+    const { token, setToken } = useAuth();
 
     const navigate = useNavigate();
 
@@ -28,30 +28,18 @@ export const useSesion = () => {
             });
 
             if (!response.ok) {
-                // Si la respuesta no es exitosa, manejar el error
-                const errorData = await response.json();
-
-                // Aquí puedes acceder a los detalles del error devueltos por el backend
-                console.error('Error al iniciar sesión:', errorData);
-
-                // También puedes lanzar un nuevo error si lo deseas
-                // throw new Error(errorData.message);
-
-                return;
+                throw new Error(`HTTP error! Status: ${response.status}`);
+            }
+            const data = await response.json();
+    
+            if (data.error) {
+                throw new Error(`Error en la autenticación: ${data.message}`);
             }
 
-            // La respuesta fue exitosa, obtener el token
-            const tokenSesion = await response.json();
-
-            // Guardar el token en el contexto de autenticación
-            setToken(tokenSesion);
-
-            // Navegar a la página de Inicio
+            setToken(data.response);
             navigate('/Inicio');
-
         } catch (error) {
-            // Manejar errores de red u otros errores
-            console.error('Error al realizar la petición:', error.message);
+            console.error('Error en la solicitud http:', error);
         }
     };
 

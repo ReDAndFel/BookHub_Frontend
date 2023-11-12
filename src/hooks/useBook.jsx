@@ -3,6 +3,7 @@ import { useNavigate } from "react-router-dom";
 
 export const useBook = () => {
     const apiUrl = "http://localhost:8080/api/libros"
+    const apiModUrl = "http://localhost:8080/api/mod"
 
     const bookInitial = {
         id: '',
@@ -24,6 +25,7 @@ export const useBook = () => {
     const [isFavorite, setIsFavorite] = useState(false);
     const [isBought, setIsBought] = useState(false);
     const [listBooks, setListBooks] = useState([]);
+    const [initiaList, setInitialList] = useState([]);
 
     const navigate = useNavigate();
 
@@ -43,6 +45,102 @@ export const useBook = () => {
         setIsFavorite(!isFavorite);
     }
 
+    const getBookByCategory = async (idCategory) => {
+        fetch(`${apiUrl}/obtener_libros_categoria/${idCategory}`)
+            .then(response => {
+                if (!response.ok) {
+                    throw new Error(`HTTP error! Status: ${response.status}`);
+                }
+                return response.json();
+            })
+            .then(data => {
+                setListBooks(data.response)
+            })
+            .catch(error => {
+                console.error('Error en la solicitud http:', error);
+            });
+    }
+
+    const getFavoriteBooks = async (idUser) => {
+        fetch(`${apiUrl}/obtener_libros_favoritos/${idUser}`)
+            .then(response => {
+                if (!response.ok) {
+                    throw new Error(`HTTP error! Status: ${response.status}`);
+                }
+                return response.json();
+            })
+            .then(data => {
+                setListBooks(data.response)
+            })
+            .catch(error => {
+                console.error('Error en la solicitud http:', error);
+            });
+    }
+
+    const getBooksByPrice = async (minPrice, maxPrice) => {
+        fetch(`${apiUrl}/obtener_libros_precio/${minPrice}/${maxPrice}`)
+            .then(response => {
+                if (!response.ok) {
+                    throw new Error(`HTTP error! Status: ${response.status}`);
+                }
+                return response.json();
+            })
+            .then(data => {
+                setListBooks(data.response)
+            })
+            .catch(error => {
+                console.error('Error en la solicitud http:', error);
+            });
+    }
+
+    const getBooksByTitle = async (title) => {
+        fetch(`${apiUrl}/obtener_libros_titulo/${title}`)
+            .then(response => {
+                if (!response.ok) {
+                    throw new Error(`HTTP error! Status: ${response.status}`);
+                }
+                return response.json();
+            })
+            .then(data => {
+                setListBooks(data.response)
+            })
+            .catch(error => {
+                console.error('Error en la solicitud http:', error);
+            });
+    }
+
+    const getAllBooks = async () => {
+        fetch(`${apiModUrl}/obtener_libros`)
+            .then(response => {
+                if (!response.ok) {
+                    throw new Error(`HTTP error! Status: ${response.status}`);
+                }
+                return response.json();
+            })
+            .then(data => {
+                setListBooks(data.response)
+            })
+            .catch(error => {
+                console.error('Error en la solicitud http:', error);
+            });
+    }
+
+    const getBookByState = async (idStateBook) => {
+        fetch(`${apiModUrl}/obtener_libros_estado/${idStateBook}`)
+            .then(response => {
+                if (!response.ok) {
+                    throw new Error(`HTTP error! Status: ${response.status}`);
+                }
+                return response.json();
+            })
+            .then(data => {
+                setListBooks(data.response)
+            })
+            .catch(error => {
+                console.error('Error en la solicitud http:', error);
+            });
+    }
+
     const getAllAprovedBooks = async () => { // <- Marcar la función como async
         fetch(`${apiUrl}/obtener_libros_aprobados`)
             .then(response => {
@@ -52,7 +150,54 @@ export const useBook = () => {
                 return response.json();
             })
             .then(data => {
-                console.log(data.response)
+                setListBooks(data.response)
+                setInitialList(data.response)
+            })
+            .catch(error => {
+                console.error('Error en la solicitud http:', error);
+            });
+    }
+
+    const getSharedBooks = async (idUser) => {
+        fetch(`${apiUrl}/obtener_libros_compartidos/${idUser}`)
+            .then(response => {
+                if (!response.ok) {
+                    throw new Error(`HTTP error! Status: ${response.status}`);
+                }
+                return response.json();
+            })
+            .then(data => {
+                setListBooks(data.response)
+            })
+            .catch(error => {
+                console.error('Error en la solicitud http:', error);
+            });
+    }
+
+    const getBooksByUser = async (idUser) => {
+        fetch(`${apiUrl}/obtener_libros_usuario/${idUser}`)
+            .then(response => {
+                if (!response.ok) {
+                    throw new Error(`HTTP error! Status: ${response.status}`);
+                }
+                return response.json();
+            })
+            .then(data => {
+                setListBooks(data.response)
+            })
+            .catch(error => {
+                console.error('Error en la solicitud http:', error);
+            });
+    }
+    const getLibrary = async (idUser) => {
+        fetch(`${apiUrl}/libreria/${idUser}`)
+            .then(response => {
+                if (!response.ok) {
+                    throw new Error(`HTTP error! Status: ${response.status}`);
+                }
+                return response.json();
+            })
+            .then(data => {
                 setListBooks(data.response)
             })
             .catch(error => {
@@ -89,7 +234,6 @@ export const useBook = () => {
                 return response.json();
             })
             .then(data => {
-                console.log(data.response)
                 setBook(data.response)
                 getBoughtState(idBook)
                 getFavoriteState(idBook);
@@ -99,5 +243,5 @@ export const useBook = () => {
             });
     }
 
-    return { book, listBooks, getAllAprovedBooks, isFavorite, isBought, handleAddCart, handleLogin, handleRead, handleFavorite, handleChangeBook, handleChangeAvailable, getBook };
+    return { book, listBooks, initiaList,getAllAprovedBooks, setListBooks, getBooksByUser, getLibrary, getAllBooks, getSharedBooks, getBooksByTitle, getBookByState, getBooksByPrice, isFavorite, isBought, getFavoriteBooks, handleAddCart, handleLogin, handleRead, handleFavorite, handleChangeBook, handleChangeAvailable, getBook, getBookByCategory };
 }

@@ -13,7 +13,7 @@ export default function Home() {
 
     const { token } = useAuth();
     const { isMod, validateMod } = useUser();
-    const {listBooks,getAllAprovedBooks} = useBook()
+    const {listBooks,initiaList,setListBooks,getAllAprovedBooks,getBooksByPrice} = useBook()    
     const [idUser, setIdUser] = useState('');
     const [isLoged, setIsLoged] = useState(false);
 
@@ -25,10 +25,9 @@ export default function Home() {
             setIdUser(token.idUser);
             setIsLoged(true);
             validateMod(token.rol);
-        };
-    
+        };    
         fetchData();
-    }, []);
+    }, []);     
     
 
     return (
@@ -36,7 +35,7 @@ export default function Home() {
             <div className='home_container'>
                 <h1>BookHub</h1>
                 <Searcher placeholder="Buscar..." />
-                <SortButton />
+                <SortButton initialList={initiaList} setListInitial = {setListBooks} getBooksByPrice ={getBooksByPrice} />
                 <ListBook list={listBooks} />
             </div>
             {isMod ? <NavMod /> : <Nav />}
