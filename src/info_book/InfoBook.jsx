@@ -12,6 +12,7 @@ import { useBook } from "../hooks/useBook";
 import AddReview from '../add_review/AddReview';
 import { useUser } from '../hooks/useUser';
 import { useAuth } from '../AuthContext';
+import { library } from '@fortawesome/fontawesome-svg-core';
 
 
 const userInitial = {
@@ -20,36 +21,50 @@ const userInitial = {
     email: 'maria@qweqw',
     password: '',
     confirmPassword: '',
-    firstName:'Maria',
+    firstName: 'Maria',
     lastName: 'Cardona',
     phone: '32312412',
     address: 'Calle 12-30',
-    rol:'USER'
+    rol: 'USER'
 }
 
 export default function InfoBook() {
 
     let { idBook } = useParams();
-    const [idUser,setIdUser] = useState('');    
+    const [idUser, setIdUser] = useState('');
     const [isLoged, setIsLoged] = useState(false);
-
-    const { book,isFavorite,isBought,handleAddCart, handleLogin, handleRead, handleFavorite, handleChangeBook,handleChangeAvailable, getBook } = useBook();
-    const {isMod,validateMod} = useUser();
+    const { book, isFavorite, isBought, handleAddCart,getBoughtState,getFavoriteState, favoriteList,library, handleLogin, handleRead, handleFavorite, handleChangeBook, handleChangeAvailable, getBook, getFavoriteBooks, getLibrary, } = useBook();
+    const { isMod, validateMod } = useUser();
     const { token } = useAuth();
 
-    const navigate = useNavigate();   
+    const navigate = useNavigate();
 
-    useEffect(() => {        
-        
-        getBook(idBook)  
+    useEffect(() => {
 
-        if(token.idUser != "") {
+        if (token.idUser != "") {
             setIdUser(token.idUser);
             setIsLoged(true)
             validateMod(token.rol)
-        }   
+            getFavoriteBooks(token.idUser)
+            getLibrary(token.idUser)
+            getBook(idBook)         
+        } else {
+            navigate("/Login")
+        }
 
     }, [])
+
+    useEffect(() => {
+
+        if (token.idUser != "") {
+           getBoughtState(idBook)
+           getFavoriteState(idBook)
+        } else {
+            navigate("/Login")
+        }
+
+    }, [library,favoriteList])
+
 
     return (
         <>
@@ -85,7 +100,7 @@ export default function InfoBook() {
                 {isLoged && !isMod && (
                     <div className='buttons_info_book'>
                         {isBought ? <Button handlerClick={handleRead}>Leer</Button> : <Button handlerClick={handleAddCart}>Añadir al Carro</Button>}
-                        <FontAwesomeIcon onClick={handleFavorite} className={`favorite_button ${isFavorite && 'favorite'}`} icon={isFavorite ? solidHeart : regularHeart} />
+                        <FontAwesomeIcon onClick={()=>handleFavorite(idUser,idBook)} className={`favorite_button ${isFavorite && 'favorite'}`} icon={isFavorite ? solidHeart : regularHeart} />
                     </div>
                 )}
 

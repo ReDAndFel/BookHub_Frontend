@@ -25,9 +25,74 @@ export const useBook = () => {
     const [isFavorite, setIsFavorite] = useState(false);
     const [isBought, setIsBought] = useState(false);
     const [listBooks, setListBooks] = useState([]);
+    const [favoriteList, setFavoriteList] = useState([]);
+    const [library, setLibrary] = useState([]);
     const [initiaList, setInitialList] = useState([]);
 
     const navigate = useNavigate();
+
+    const handleAddBook = async (form) => {
+        try {
+            const response = await fetch(`${apiUrl}/agregar`, {
+                method: 'POST',
+                headers: {
+                    'Content-Type': 'application/json',
+                },
+                body: JSON.stringify(form),
+            });
+
+            if (!response.ok) {
+                throw new Error(`HTTP error! Status: ${response.status}`);
+            }
+            const data = await response.json();
+            console.log(data);
+        } catch (error) {
+            console.error('Error en la solicitud http:', error);
+        }
+
+    }
+
+    const handleDeletePaymentMethod = async (idBook) => {
+        try {
+            const response = await fetch(`${apiUrl}/eliminar/${idBook}`, {
+                method: 'PUT',
+                headers: {
+                    'Content-Type': 'application/json',
+                },
+            });
+
+            if (!response.ok) {
+                throw new Error(`HTTP error! Status: ${response.status}`);
+            }
+            const data = await response.json();
+            console.log(data);
+            setListBooks((prevList) => prevList.filter((book) => book.id !== idBook));
+
+        } catch (error) {
+            console.error('Error en la solicitud http:', error);
+        }
+    }
+
+    const handleUpdateBook = async (idBook, updatedBook) => {
+        try {
+            const response = await fetch(`${apiUrl}/actualizar/${idBook}`, {
+                method: 'PUT',
+                headers: {
+                    'Content-Type': 'application/json',
+                },
+                body: JSON.stringify(updatedBook),
+            });
+
+            if (!response.ok) {
+                throw new Error(`HTTP error! Status: ${response.status}`);
+            }
+            const data = await response.json();
+            console.log(data);
+
+        } catch (error) {
+            console.error('Error en la solicitud http:', error);
+        }
+    }
 
     const handleAddCart = () => {
 
@@ -41,7 +106,43 @@ export const useBook = () => {
 
     }
 
-    const handleFavorite = () => {
+    const handleFavorite = async (idUser, idBook) => {
+        if (isFavorite) {
+            try {
+                const response = await fetch(`${apiUrl}/quitar_libro_favorito/${idUser}/${idBook}`, {
+                    method: 'DELETE',
+                    headers: {
+                        'Content-Type': 'application/json',
+                    },
+                });
+
+                if (!response.ok) {
+                    throw new Error(`HTTP error! Status: ${response.status}`);
+                }
+                const data = await response.json();
+                console.log(data);
+            } catch (error) {
+                console.error('Error en la solicitud http:', error);
+            }
+        }else{
+            try {
+                const response = await fetch(`${apiUrl}/agregar_libro_favorito/${idUser}/${idBook}`, {
+                    method: 'POST',
+                    headers: {
+                        'Content-Type': 'application/json',
+                    },
+                });
+    
+                if (!response.ok) {
+                    throw new Error(`HTTP error! Status: ${response.status}`);
+                }
+                const data = await response.json();
+                console.log(data);
+            } catch (error) {
+                console.error('Error en la solicitud http:', error);
+            }
+        }     
+
         setIsFavorite(!isFavorite);
     }
 
@@ -70,7 +171,7 @@ export const useBook = () => {
                 return response.json();
             })
             .then(data => {
-                setListBooks(data.response)
+                setFavoriteList(data.response)
             })
             .catch(error => {
                 console.error('Error en la solicitud http:', error);
@@ -198,19 +299,19 @@ export const useBook = () => {
                 return response.json();
             })
             .then(data => {
-                setListBooks(data.response)
+                setLibrary(data.response)
             })
             .catch(error => {
                 console.error('Error en la solicitud http:', error);
             });
     }
 
-    const getBoughtState = (idBook) => {
-        let state = false //funcion de obtener el estado de compra del libro
+    const getBoughtState = async (idBook) => {
+        const state = library.some(book => book.id.toString() === idBook.toString());
         setIsBought(state);
     }
-    const getFavoriteState = (idBook) => {
-        let state = false //funcion de obtener el estado de favorito de un libro
+    const getFavoriteState = async (idBook) => {
+        const state = favoriteList.some(book => book.id.toString() === idBook.toString());
         setIsFavorite(state);
     }
 
@@ -236,13 +337,11 @@ export const useBook = () => {
             .then(data => {
                 console.log(data.response)
                 setBook(data.response)
-                getBoughtState(idBook)
-                getFavoriteState(idBook);
             })
             .catch(error => {
                 console.error('Error en la solicitud http:', error);
             });
     }
 
-    return { book, listBooks, initiaList,getAllAprovedBooks, setListBooks, getBooksByUser, getLibrary, getAllBooks, getSharedBooks, getBooksByTitle, getBookByState, getBooksByPrice, isFavorite, isBought, getFavoriteBooks, handleAddCart, handleLogin, handleRead, handleFavorite, handleChangeBook, handleChangeAvailable, getBook, getBookByCategory };
+    return { book, listBooks, initiaList, getBoughtState, getFavoriteState, getAllAprovedBooks, setListBooks, getBooksByUser, getLibrary, getAllBooks, getSharedBooks, getBooksByTitle, getBookByState, getBooksByPrice, isFavorite, isBought, getFavoriteBooks, handleAddCart, handleLogin, handleRead, handleFavorite, handleChangeBook, handleChangeAvailable, getBook, getBookByCategory, library, favoriteList };
 }

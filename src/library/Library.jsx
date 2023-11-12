@@ -10,7 +10,7 @@ import { useEffect } from "react";
 
 export default function Library() {
 
-    const {listBooks,initiaList,setListBooks,getLibrary} = useBook()
+    const {library,getLibrary} = useBook()
     const params = useParams(); 
 
     useEffect(() => {
@@ -24,7 +24,7 @@ export default function Library() {
         <>
             <Header goBack goBackNavigate={"/Cuenta"} >Librería</Header>
             <div className="library_container">
-                <ListBook list={listBooks}/>
+                <ListBook list={library}/>
             </div>
         </>
     );
