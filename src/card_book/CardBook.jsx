@@ -1,5 +1,5 @@
 import './CardBook.css'
-export default function CardBook({key, image, title, price}) {
+export default function CardBook({image, title, price}) {
     return (
         <div className="cardbook_container">
             <div className="cardbook_image_container">

@@ -2,13 +2,14 @@ import { useState } from "react";
 import { useNavigate } from "react-router-dom";
 
 export const useBook = () => {
+    const apiUrl = "http://localhost:8080/api/libros"
 
     const bookInitial = {
         id: '',
         image: '',
         title: '',
         autor: '',
-        editorial:'',
+        editorial: '',
         realeaseDate: '',
         puntuation: 0,
         reviews: 0,
@@ -16,12 +17,13 @@ export const useBook = () => {
         available: false,
         category: '',
         sinopsis: '',
-        file:''
+        file: ''
     }
 
     const [book, setBook] = useState(bookInitial);
     const [isFavorite, setIsFavorite] = useState(false);
     const [isBought, setIsBought] = useState(false);
+    const [listBooks, setListBooks] = useState([]);
 
     const navigate = useNavigate();
 
@@ -40,7 +42,23 @@ export const useBook = () => {
     const handleFavorite = () => {
         setIsFavorite(!isFavorite);
     }
-   
+
+    const getAllAprovedBooks = async () => { // <- Marcar la función como async
+        fetch(`${apiUrl}/obtener_libros_aprobados`)
+            .then(response => {
+                if (!response.ok) {
+                    throw new Error(`HTTP error! Status: ${response.status}`);
+                }
+                return response.json();
+            })
+            .then(data => {
+                setListBooks(data.response)
+            })
+            .catch(error => {
+                console.error('Error en la solicitud http:', error);
+            });
+    }
+
     const getBoughtState = (idBook) => {
         let state = false //funcion de obtener el estado de compra del libro
         setIsBought(state);
@@ -60,7 +78,7 @@ export const useBook = () => {
         console.log(book)
     }
 
-    const loadBook = (idBook) =>{
+    const loadBook = (idBook) => {
         console.log(`El id del book es ${idBook}`)
         const bookFound = {
             id: idBook,
@@ -76,10 +94,10 @@ export const useBook = () => {
             sinopsis: 'El Principito es una narración corta del escritor francés Antoine de Saint-Exupéry. La historia se centra en un pequeño  príncipe que realiza una travesía por el universo. En este viaje descubre la extraña forma en que los adultos ven la vida y comprende el valor del amor y la amistad.',
         }
         console.log(bookFound)
-        setBook(bookFound)    
+        setBook(bookFound)
         getBoughtState(bookFound.id)
         getFavoriteState(bookFound.id);
     }
 
-    return { book,isFavorite,isBought,handleAddCart, handleLogin, handleRead, handleFavorite, handleChangeBook,handleChangeAvailable,loadBook};
+    return { book, listBooks, getAllAprovedBooks, isFavorite, isBought, handleAddCart, handleLogin, handleRead, handleFavorite, handleChangeBook, handleChangeAvailable, loadBook };
 }
