@@ -46,6 +46,7 @@ export default function UpdateUser() {
         setErrors(validationsForm(form));
         if (Object.keys(errors).length === 0) {
             handleUpdateUser(idUser, form);
+            navigate(-1);
         }
 
     }
@@ -53,7 +54,7 @@ export default function UpdateUser() {
     useEffect(() => {
         if (token.idUser != "") {
             setIdUser(token.idUser);
-            getUser(idUser)
+            getUser(token.idUser)
             console.log(token);
         }else{
             navigate("/Login")
