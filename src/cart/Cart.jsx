@@ -66,7 +66,7 @@ export default function Cart() {
     }
 
     const handleConfirmBuy = () => {
-
+        navigate("/Confirmar_compra")
     }
 
     return (

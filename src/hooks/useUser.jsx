@@ -21,12 +21,7 @@ export const useUser = () => {
     const [listUsers, setListUsers] = useState([]);
     const [listFriends, setListFriends] = useState([]);
     const apiUrl = "http://localhost:8080/api/usuario"
-
-    const handleSignup = (formSignin) => {
-
-        setUser(formSignin); // metodo de iniciar sesion y obtener el token
-        console.log(formSignin)
-    }
+    
 
     const getUsers = () => {
         fetch(`${apiUrl}/obtener_usuarios`)
