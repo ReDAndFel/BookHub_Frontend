@@ -19,6 +19,8 @@ export const useUser = () => {
     const [isMod, setIsMod] = useState(false);
     const [isFriend, setIsFriend] = useState(false);
     const [listUsers, setListUsers] = useState([]);
+    const [listFriends, setListFriends] = useState([]);
+    const apiUrl = "http://localhost:8080/api/usuario"
 
     const handleSignup = (formSignin) => {
 
@@ -27,90 +29,122 @@ export const useUser = () => {
     }
 
     const getUsers = () => {
-        let listUsers = [
-            {
-                idUser: '4',
-                username: 'Alex0123'
-            },
-            {
-                idUser: '5',
-                username: 'Samanta52'
-            },
-            {
-                idUser: '6',
-                username: 'JulianAcost'
-            },
-            {
-                idUser: '7',
-                username: 'Andrea Bravo'
-            },
-            {
-                idUser: '8',
-                username: 'Marceli12'
-            },
-            {
-                idUser: '9',
-                username: 'VivaColombia123'
-            },
-            {
-                idUser: '10',
-                username: 'reeper'
-            }
+        fetch(`${apiUrl}/obtener_usuarios`)
+            .then(response => {
+                if (!response.ok) {
+                    throw new Error(`HTTP error! Status: ${response.status}`);
+                }
+                return response.json();
+            })
+            .then(data => {
+                setListUsers(data.response)
+            })
+            .catch(error => {
+                console.error('Error en la solicitud http:', error);
+            });
+    }
 
-        ]
-
-        setListUsers(listUsers)
+    const getIsFriendState = async (idUser) => {
+        const state = listFriends.some(friend => friend.id.toString() === idUser.toString());
+        setIsFriend(state);
     }
 
     const getFriends = (idUser) => {
-        let listFriendsUser = [
-            {
-                idUser: '1',
-                username: 'Andres12'
-            },
-            {
-                idUser: '2',
-                username: 'Maria120'
-            }
-        ] //metodo de obtener la lista de amigos del user
-        setListUsers(listFriendsUser)
+        fetch(`${apiUrl}/obtener_amigos/${idUser}`)
+            .then(response => {
+                if (!response.ok) {
+                    throw new Error(`HTTP error! Status: ${response.status}`);
+                }
+                return response.json();
+            })
+            .then(data => {
+                setListFriends(data.response)
+            })
+            .catch(error => {
+                console.error('Error en la solicitud http:', error);
+            });
+
     }
 
     const getUser = (idUser) => {
-        let userFound = {
-            id: '1004684293',
-            username: 'Maria',
-            email: 'maria@qweqw',
-            password: '',
-            confirmPassword: '',
-            firstName: 'Maria',
-            lastName: 'Cardona',
-            phone: '32312412',
-            address: 'Calle 12-30',
-            rol: 'USER'
-        } //funcion de obtener un user
-
-        setUser(userFound);
+        fetch(`${apiUrl}/obtener_usuario/${idUser}`)
+            .then(response => {
+                if (!response.ok) {
+                    throw new Error(`HTTP error! Status: ${response.status}`);
+                }
+                return response.json();
+            })
+            .then(data => {
+                setUser(data.response)
+            })
+            .catch(error => {
+                console.error('Error en la solicitud http:', error);
+            });
     }
 
     const validateMod = (rol) => {
         if (rol == "MODERATOR") setIsMod(true)
     }
 
-    const handlerAddFriend = (idUserToken,idUser) => {
-        if (isFriend) {
-            console.log(`El usuario ${user.username} fue eliminado de la lista de amigos del usuario con id ${idUserToken}`)
+    const handlerAddFriend = async (idUserToken, idUser) => {
+        if (!isFriend) {
+            try {
+                const response = await fetch(`${apiUrl}/agregar_amigo/${idUserToken}/${idUser}`, {
+                    method: 'POST',
+                    headers: {
+                        'Content-Type': 'application/json',
+                    },
+                });
+
+                if (!response.ok) {
+                    throw new Error(`HTTP error! Status: ${response.status}`);
+                }
+                const data = await response.json();
+                console.log(data);
+            } catch (error) {
+                console.error('Error en la solicitud http:', error);
+            }
         } else {
-            console.log(`El usuario ${user.username} fue agregado a la lista de amigos del usuario con id ${idUserToken}`)
+            try {
+                const response = await fetch(`${apiUrl}/quitar_amigo/${idUserToken}/${idUser}`, {
+                    method: 'DELETE',
+                    headers: {
+                        'Content-Type': 'application/json',
+                    },
+                });
+
+                if (!response.ok) {
+                    throw new Error(`HTTP error! Status: ${response.status}`);
+                }
+                const data = await response.json();
+                console.log(data);
+            } catch (error) {
+                console.error('Error en la solicitud http:', error);
+            }
         }
         setIsFriend(!isFriend)
     }
 
-    const handleUpdateUser = (idUserToken, updatedUser) => {
-        console.log(`Se actualizó el usuario con el id ${idUserToken}`)
-        setUser(updatedUser); // metodo de actualizar usuario
-        console.log(updatedUser)
+    const handleUpdateUser = async (idUser, updatedUser) => {
+        try {
+            const response = await fetch(`${apiUrl}/actualizar/${idUser}`, {
+                method: 'PUT',
+                headers: {
+                    'Content-Type': 'application/json',
+                },
+                body: JSON.stringify(updatedUser),
+            });
+
+            if (!response.ok) {
+                throw new Error(`HTTP error! Status: ${response.status}`);
+            }
+            const data = await response.json();
+            console.log(data);
+
+        } catch (error) {
+            console.error('Error en la solicitud http:', error);
+        }
     }
 
-    return { getUser, user, listUsers, isMod, isFriend, handlerAddFriend, handleUpdateUser, handleSignup, validateMod, getUsers, getFriends }
+    return { getUser, user, listUsers, isMod, isFriend, listFriends, getIsFriendState, handlerAddFriend, handleUpdateUser, handleSignup, validateMod, getUsers, getFriends }
 }

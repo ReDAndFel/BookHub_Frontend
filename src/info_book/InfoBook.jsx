@@ -76,8 +76,9 @@ export default function InfoBook() {
                     <div className='info_book'>
                         <h1>{book.title}</h1>
                         <span>{book.autor}</span>
+                        <span>{book.editorial}</span>
                         <span>{book.realeaseDate}</span>
-                        <span>${book.puntuation} <FontAwesomeIcon className='span_white_info_book' icon={faStar} /> | {book.reviews} reseñas</span>
+                        <span>{book.puntuation} <FontAwesomeIcon className='span_white_info_book' icon={faStar} /></span>
                         <span>$ {book.price}</span>
                     </div>
                 </div>
@@ -87,11 +88,11 @@ export default function InfoBook() {
                 {isMod && (
                     <div className='mod_select_info_book'>
                         <span>Seleccione un Estado:</span>
-                        <select value={book.available} onChange={handleChangeBook} name="available" id="available_info_book">
+                        <select value={book.idStateBook} onChange={handleChangeBook} name="idStateBook" id="available_info_book">
                             <option value={true}>Disponible</option>
                             <option value={false}>No Disponible</option>
                         </select>
-                        <Button handlerClick={handleChangeAvailable}>Guardar Estado</Button>
+                        <Button handlerClick={()=>handleChangeAvailable(book.id, book)}>Guardar Estado</Button>
                     </div>
                 )}
 

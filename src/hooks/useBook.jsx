@@ -15,7 +15,7 @@ export const useBook = () => {
         puntuation: 0,
         reviews: 0,
         price: 0,
-        available: false,
+        idStateBook: 1,
         category: '',
         sinopsis: '',
         file: ''
@@ -52,7 +52,7 @@ export const useBook = () => {
 
     }
 
-    const handleDeletePaymentMethod = async (idBook) => {
+    const handleDeleteBook = async (idBook) => {
         try {
             const response = await fetch(`${apiUrl}/eliminar/${idBook}`, {
                 method: 'PUT',
@@ -124,7 +124,7 @@ export const useBook = () => {
             } catch (error) {
                 console.error('Error en la solicitud http:', error);
             }
-        }else{
+        } else {
             try {
                 const response = await fetch(`${apiUrl}/agregar_libro_favorito/${idUser}/${idBook}`, {
                     method: 'POST',
@@ -132,7 +132,7 @@ export const useBook = () => {
                         'Content-Type': 'application/json',
                     },
                 });
-    
+
                 if (!response.ok) {
                     throw new Error(`HTTP error! Status: ${response.status}`);
                 }
@@ -141,9 +141,10 @@ export const useBook = () => {
             } catch (error) {
                 console.error('Error en la solicitud http:', error);
             }
-        }     
+        }
 
         setIsFavorite(!isFavorite);
+
     }
 
     const getBookByCategory = async (idCategory) => {
@@ -321,12 +322,27 @@ export const useBook = () => {
         setBook({ ...book, [name]: value });
     }
 
-    const handleChangeAvailable = () => {
-        console.log(book)
+    const handleChangeAvailable = async (idBook, form) => {
+        try {
+            const response = await fetch(`${apiModUrl}/revisar_libro/${idBook}`, {
+                method: 'PUT',
+                headers: {
+                    'Content-Type': 'application/json',
+                },
+                body: JSON.stringify(form),
+            });
+
+            if (!response.ok) {
+                throw new Error(`HTTP error! Status: ${response.status}`);
+            }
+            const data = await response.json();
+            console.log(data);
+        } catch (error) {
+            console.error('Error en la solicitud http:', error);
+        }
     }
 
     const getBook = (idBook) => {
-        console.log(`El id del book es ${idBook}`)
         fetch(`${apiUrl}/obtener/${idBook}`)
             .then(response => {
                 if (!response.ok) {
@@ -343,5 +359,5 @@ export const useBook = () => {
             });
     }
 
-    return { book, listBooks, initiaList, getBoughtState, getFavoriteState, getAllAprovedBooks, setListBooks, getBooksByUser, getLibrary, getAllBooks, getSharedBooks, getBooksByTitle, getBookByState, getBooksByPrice, isFavorite, isBought, getFavoriteBooks, handleAddCart, handleLogin, handleRead, handleFavorite, handleChangeBook, handleChangeAvailable, getBook, getBookByCategory, library, favoriteList };
+    return { book, listBooks, initiaList, handleUpdateBook,handleAddBook,handleDeleteBook,getBoughtState, getFavoriteState, getAllAprovedBooks, setListBooks, getBooksByUser, getLibrary, getAllBooks, getSharedBooks, getBooksByTitle, getBookByState, getBooksByPrice, isFavorite, isBought, getFavoriteBooks, handleAddCart, handleLogin, handleRead, handleFavorite, handleChangeBook, handleChangeAvailable, getBook, getBookByCategory, library, favoriteList };
 }

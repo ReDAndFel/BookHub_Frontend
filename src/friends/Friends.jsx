@@ -11,9 +11,7 @@ import { useUser } from '../hooks/useUser';
 export default function Friends() {
 
     const { token } = useAuth();
-    const { listUsers, getFriends } = useUser();
-
-    const [idUser, setIdUser] = useState('');
+    const { listFriends, getFriends } = useUser();
    
     const navigate = useNavigate();
 
@@ -29,7 +27,6 @@ export default function Friends() {
 
     }, [])
 
-
     return (
         <>
             <Header goBack goBackNavigate={"/Cuenta"}> Mis Amigos</Header>
@@ -39,7 +36,7 @@ export default function Friends() {
                 <Button handlerClick={handlerAddFriend}>Buscar Nuevos Amigos</Button>
 
                 <div className='friends_list_container'>
-                    {listUsers.map((friend) => <UserListItem key={friend.idUser} idUser={friend.idUser} username={friend.username} />)}
+                    {listFriends.map((friend) => <UserListItem key={friend.id} idUser={friend.id} username={friend.username} />)}
                 </div>
 
             </div>

@@ -10,6 +10,10 @@ export default function listReviews({idBook}){
     useEffect(() => {
         getReviewsBook(idBook)
     },[]);
+    
+    useEffect(() => {
+        getReviewsBook(idBook)
+    },[reviewListBook]);
 
     return(
         <div className='reviews_info_book'>

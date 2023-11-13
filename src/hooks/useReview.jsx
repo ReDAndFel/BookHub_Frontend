@@ -1,4 +1,5 @@
 import { useState } from "react";
+import listReviews from "../list_reviews/ListReviews";
 
 const reviewDto = {
     idUser: '',
@@ -10,13 +11,33 @@ const reviewDto = {
 export const useReview = () => {
     const apiUrl = "http://localhost:8080/api/resenia"
     const [review, setReview] = useState(reviewDto);
-    const [reviewListBook, setReviewListBook] = useState([]);    
+    const [reviewListBook, setReviewListBook] = useState([]); 
 
-    const handleAddReview = (idBook, idUser) => {
-        let newReview = { ...review }
-        newReview.idBook = idBook;
-        newReview.idUser = idUser;
-        console.log(newReview); //funcion de agregar en la base de datos la funcion
+    const handleChangeReview = (e) => {
+        const { name, value } = e.target;
+        setReview({ ...review, [name]: value });
+    }   
+
+    const handleAddReview = async (review) => {
+        console.log(`Resenia de addReview`)
+        console.log(review)
+        try {
+            const response = await fetch(`${apiUrl}/reseniar`, {
+                method: 'POST',
+                headers: {
+                    'Content-Type': 'application/json',
+                },
+                body: JSON.stringify(review),
+            });
+
+            if (!response.ok) {
+                throw new Error(`HTTP error! Status: ${response.status}`);
+            }        
+            setReviewListBook([...reviewListBook, review]);
+        } catch (error) {
+            console.error('Error en la solicitud http:', error);
+        }
+        setReview({})
     }
 
     const getReviewsBook = (idBook) => {
@@ -29,7 +50,7 @@ export const useReview = () => {
                 return response.json();
             })
             .then(data => {
-                console.log(data.response)
+
                 setReviewListBook(data.response)
             })
             .catch(error => {
@@ -37,5 +58,6 @@ export const useReview = () => {
             });
     }
 
-    return { review, reviewListBook, handleAddReview, getReviewsBook }
+
+    return { review, reviewListBook, handleAddReview,handleChangeReview, getReviewsBook }
 } 

@@ -13,27 +13,24 @@ export default function AddFriends() {
     const { token } = useAuth();
     const { listUsers, getUsers } = useUser();
 
-    const [idUser, setIdUser] = useState('');
-    const [isLoged, setIsLoged] = useState(false);
-
     const navigate = useNavigate();
 
 
     useEffect(() => {
-
         if (token.idUser != "") {
-            getUsers(token.idUser)
+            getUsers()
+        }else{
+            navigate(`/Login`)
         }
 
     }, [])
 
     return (
         <>
-            <Header goBack> Buscar Nuevos Amigos</Header>
+            <Header goBack goBackNavigate={`/Amigos/${token.idUser}`}> Buscar Nuevos Amigos</Header>
             <div className='add_friends_container'>
-                <Searcher placeholder={'Buscar usuario...'} />
                 <div className='user_list_container'>
-                    {listUsers.map((user) => <UserListItem key={user.idUser} idUser={user.idUser} username={user.username} />)}
+                    {listUsers.map((user) => <UserListItem key={user.id} idUser={user.id} username={user.username} />)}
                 </div>
 
             </div>

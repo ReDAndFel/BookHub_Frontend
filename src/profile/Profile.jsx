@@ -12,7 +12,7 @@ import { faCircleUser } from '@fortawesome/free-solid-svg-icons';
 export default function Profile() {
 
     const { idUser } = useParams();
-    const { getUser, user ,isFriend, handlerAddFriend} = useUser();
+    const { getUser,getFriends, listFriends,getIsFriendState, user, isFriend, handlerAddFriend } = useUser();
     const { token } = useAuth();
 
     const [idUserToken, setIdUserToken] = useState('');
@@ -20,32 +20,39 @@ export default function Profile() {
 
     const navigate = useNavigate();
 
-    useEffect(() => {
-        getUser(idUser)
+    useEffect(() => {       
         if (token.idUser != "") {
+            getUser(idUser)
             setIdUserToken(token.idUser);
             setIsLoged(true)
+            getFriends(token.idUser)
+        }else{
+            navigate("/Login");
         }
     }, []);
 
-    const handleClickAddFriend = () =>{
-        handlerAddFriend(idUserToken)
+    useEffect(() => {       
+        getIsFriendState(idUser)
+    }, [listFriends]);
+
+    const handleClickAddFriend = () => {
+        handlerAddFriend(idUserToken, idUser)
     }
 
-    const handlerUpdateInfo = () =>{
-       navigate(`/Actualizar_informacion`)
+    const handlerUpdateInfo = () => {
+        navigate(`/Actualizar_informacion`)
     }
 
     return (
         <>
-            <Header goBack> Perfil</Header>
+            <Header goBack goBackNavigate={-1}> Perfil</Header>
             <div className='profile_container'>
                 <div className="profile_header">
                     <FontAwesomeIcon className="profile_icon" icon={faCircleUser} />
                     <h2>{user.username}</h2>
                 </div>
-                {idUserToken != user.id  && isLoged && <Button handlerClick={handleClickAddFriend}>{!isFriend ? 'Agregar a Amigos' : 'Eliminar de Amigos'}</Button>}
-                {idUserToken == user.id  && isLoged && <Button handlerClick={handlerUpdateInfo}>Actualizar Informacion</Button>}
+                {idUserToken != user.id && isLoged && <Button handlerClick={handleClickAddFriend}>{!isFriend ? 'Agregar a Amigos' : 'Eliminar de Amigos'}</Button>}
+                {idUserToken == user.id && isLoged && <Button handlerClick={handlerUpdateInfo}>Actualizar Informacion</Button>}
                 <div className='info_profile_container'>
                     <span className='info_profile'>{`Nombre: ${user.firstName}`}</span>
                     <span className='info_profile'>{`Apellido: ${user.lastName}`}</span>

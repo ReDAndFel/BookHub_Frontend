@@ -8,6 +8,10 @@ export default function UserListItem({ idUser ,username }) {
     const navigate = useNavigate();
 
     const handlerClick = () =>{
+        console.log("idUser es:")
+        console.log(idUser)
+        console.log("username es:")
+        console.log(username)
         navigate(`/Perfil/${idUser}`)
     } 
 

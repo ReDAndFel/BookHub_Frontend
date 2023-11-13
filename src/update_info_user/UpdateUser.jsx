@@ -5,6 +5,7 @@ import { useUser } from '../hooks/useUser';
 import './UpdateUser.css'
 import { useForm } from '../hooks/useForm';
 import ButtonSubmit from '../button_submit/ButtonSubmit';
+import { useNavigate } from 'react-router-dom';
 
 const validationsForm = (form) => {
     let errors = {};
@@ -38,7 +39,7 @@ export default function UpdateUser() {
     const { token } = useAuth();
     const { form, setForm, errors, setErrors, handleChange, handleBlur } = useForm(user, validationsForm);
 
-
+    const navigate = useNavigate();
 
     const handleSubmit = (e) => {
         e.preventDefault()
@@ -54,6 +55,8 @@ export default function UpdateUser() {
             setIdUser(token.idUser);
             getUser(idUser)
             console.log(token);
+        }else{
+            navigate("/Login")
         }
     }, []);
 
@@ -63,7 +66,7 @@ export default function UpdateUser() {
 
     return (
         <>
-            <Header goBack> Informacion de usuario</Header>
+            <Header goBack goBackNavigate={`/Perfil/${idUser}`}> Informacion de usuario</Header>
             <div className='info_user_container'>
                 <form onSubmit={handleSubmit}>
                     <div className='texfield_update_info'>
