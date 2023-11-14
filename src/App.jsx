@@ -45,7 +45,7 @@ function App() {
             <Route path='/Amigos/:idUser' element={<Friends />} />
             <Route path='/Favoritos/:idUser' element={<Favorites />} />
             <Route path='/Nuevos_amigos' element={<AddFriends />} />
-            <Route path='/Search/:title' element={<Search />} />
+            <Route path='/Search/:filter/:value' element={<Search />} />
             <Route path='/Info_Libro/:idBook' element={<InfoBook />} />
             <Route path='/Perfil/:idUser' element={<Profile />} />
             <Route path='/Actualizar_informacion' element={<UpdateUser />} />

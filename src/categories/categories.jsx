@@ -2,55 +2,36 @@ import Nav from "../nav/Nav";
 import Header from "../header/Header";
 import './Categories.css'
 import { useNavigate } from "react-router-dom";
-import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
-import { faBook, faDragon, faFaceGrinHearts, faGlobe, faHeart, faSkull, faUserSecret } from "@fortawesome/free-solid-svg-icons";
+import { useCategory } from "../hooks/useCategory";
+import { useEffect } from "react";
+import { useAuth } from "../AuthContext";
 
 export default function Categories() {
 
+    const { listCategory, getCategories } = useCategory()
+    const { token } = useAuth()
     const navigate = useNavigate();
     const handleClick = (category) => {
         navigate(`/Search/Categoria/${category}`);
     }
 
+    useEffect(() => {
+        if (token.idUser != "") {
+            getCategories();
+        } else {
+            navigate("/Login");
+        }
+    }, [])
+
     return (
         <>
-            <Header goBack = {false} > Categorias </Header>
+            <Header goBack={false} > Categorias </Header>
             <div className='categories_container'>
-                <div className="categories_item" id="horror" onClick={() => handleClick('Terror')}>
-                    <FontAwesomeIcon icon={faSkull} />
-                    Terror
-                </div>
-
-                <div className="categories_item" id="education" onClick={() => handleClick('Educacion')}>
-                    <FontAwesomeIcon icon={faBook} />
-                    Educacion
-                </div>
-
-                <div className="categories_item" id="history" onClick={() => handleClick('Historia')}>
-                    <FontAwesomeIcon icon={faGlobe} />
-                    Historia
-                </div>
-
-                <div className="categories_item" id="romance" onClick={() => handleClick('Romance')}>
-                    <FontAwesomeIcon icon={faFaceGrinHearts} />
-                    Romance
-                </div>
-
-                <div className="categories_item" id="health" onClick={() => handleClick('Salud y cuidado')}>
-                    <FontAwesomeIcon icon={faHeart} />
-                    Salud y cuidado
-                </div>
-
-                <div className="categories_item" id="fantasy" onClick={() => handleClick('Fantasia')}>
-                    <FontAwesomeIcon icon={faDragon} />
-                    Fantasia
-                </div>
-
-                <div className="categories_item" id="mistery" onClick={() => handleClick('Misterio')}>
-                    <FontAwesomeIcon icon={faUserSecret} />
-                    Misterio
-                </div>
-
+                {listCategory.map((category) => (
+                    <div key={category.id} className="categories_item" id={category.id} onClick={() => handleClick(category.id)}>
+                        {category.nombre}
+                    </div>
+                ))}
             </div>
             <Nav />
         </>

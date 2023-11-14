@@ -13,7 +13,7 @@ export default function Searcher({placeholder}) {
 
     const handleSubmit = (e) => {   
         e.preventDefault();     
-        navigate(`/Search/${search}`);
+        navigate(`/Search/Titulo/${search}`);
     }
 
     return(
