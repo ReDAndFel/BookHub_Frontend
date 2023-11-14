@@ -12,30 +12,17 @@ import { useBook } from "../hooks/useBook";
 import AddReview from '../add_review/AddReview';
 import { useUser } from '../hooks/useUser';
 import { useAuth } from '../AuthContext';
-import { library } from '@fortawesome/fontawesome-svg-core';
-
-
-const userInitial = {
-    id: '12341',
-    username: 'Maria',
-    email: 'maria@qweqw',
-    password: '',
-    confirmPassword: '',
-    firstName: 'Maria',
-    lastName: 'Cardona',
-    phone: '32312412',
-    address: 'Calle 12-30',
-    rol: 'USER'
-}
+import { useCart } from '../hooks/useCart';
 
 export default function InfoBook() {
 
     let { idBook } = useParams();
     const [idUser, setIdUser] = useState('');
     const [isLoged, setIsLoged] = useState(false);
-    const { book, isFavorite, isBought, handleAddCart,getBoughtState,getFavoriteState, favoriteList,library, handleLogin, handleRead, handleFavorite, handleChangeBook, handleChangeAvailable, getBook, getFavoriteBooks, getLibrary, } = useBook();
+    const { book, isFavorite, isBought,getBoughtState,getFavoriteState, favoriteList,library, handleLogin, handleRead, handleFavorite, handleChangeBook, handleChangeAvailable, getBook, getFavoriteBooks, getLibrary, } = useBook();
     const { isMod, validateMod } = useUser();
     const { token } = useAuth();
+    const { addToCart } = useCart();
 
     const navigate = useNavigate();
 
@@ -65,6 +52,9 @@ export default function InfoBook() {
 
     }, [library,favoriteList])
 
+    const handleAddToCart = () => {
+        addToCart(book);
+    };
 
     return (
         <>
@@ -100,7 +90,7 @@ export default function InfoBook() {
 
                 {isLoged && !isMod && (
                     <div className='buttons_info_book'>
-                        {isBought ? <Button handlerClick={handleRead}>Leer</Button> : <Button handlerClick={handleAddCart}>Añadir al Carro</Button>}
+                        {isBought ? <Button handlerClick={handleRead}>Leer</Button> : <Button handlerClick={handleAddToCart}>Añadir al Carro</Button>}
                         <FontAwesomeIcon onClick={()=>handleFavorite(idUser,idBook)} className={`favorite_button ${isFavorite && 'favorite'}`} icon={isFavorite ? solidHeart : regularHeart} />
                     </div>
                 )}

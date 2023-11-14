@@ -5,7 +5,7 @@ const transactionDTO = {
     totalPrice: 0.0,
     date: "",
     idPaymentMethod: 0,
-    transactionDetails: [{}],
+    transactionDetailDTOS: [],
     idUser: 0
 }
 
@@ -17,6 +17,8 @@ const transactionDetailDTO = {
 }
 
 export const useTransaction = () => {
+
+    const apiUrl = "http://localhost:8080/api/transaccion"
 
     const { transaction, setTransaction } = useState(transactionDTO)
     const { transactionDetail, setTransactionDetail } = useState([])

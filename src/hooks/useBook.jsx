@@ -7,7 +7,7 @@ export const useBook = () => {
 
     const bookInitial = {
         id: '',
-        image: '',
+        image: [],
         title: '',
         autor: '',
         editorial: '',
@@ -18,7 +18,7 @@ export const useBook = () => {
         idStateBook: 1,
         category: '',
         sinopsis: '',
-        file: ''
+        file: []
     }
 
     const [book, setBook] = useState(bookInitial);
@@ -94,9 +94,6 @@ export const useBook = () => {
         }
     }
 
-    const handleAddCart = () => {
-
-    }
 
     const handleLogin = () => {
         navigate('/Login');
@@ -359,5 +356,5 @@ export const useBook = () => {
             });
     }
 
-    return { book, listBooks, initiaList, handleUpdateBook,handleAddBook,handleDeleteBook,getBoughtState, getFavoriteState, getAllAprovedBooks, setListBooks, getBooksByUser, getLibrary, getAllBooks, getSharedBooks, getBooksByTitle, getBookByState, getBooksByPrice, isFavorite, isBought, getFavoriteBooks, handleAddCart, handleLogin, handleRead, handleFavorite, handleChangeBook, handleChangeAvailable, getBook, getBookByCategory, library, favoriteList };
+    return { book, listBooks, initiaList, handleUpdateBook,handleAddBook,handleDeleteBook,getBoughtState, getFavoriteState, getAllAprovedBooks, setListBooks, getBooksByUser, getLibrary, getAllBooks, getSharedBooks, getBooksByTitle, getBookByState, getBooksByPrice, isFavorite, isBought, getFavoriteBooks, handleLogin, handleRead, handleFavorite, handleChangeBook, handleChangeAvailable, getBook, getBookByCategory, library, favoriteList };
 }

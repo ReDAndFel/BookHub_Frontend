@@ -11,7 +11,7 @@ const userDto = {
     lastName: '',
     phone: '',
     address: '',
-    rol: ''
+    idRol: 0,
 }
 
 export const useUser = () => {
@@ -141,5 +141,5 @@ export const useUser = () => {
         }
     }
 
-    return { getUser, user, listUsers, isMod, isFriend, listFriends, getIsFriendState, handlerAddFriend, handleUpdateUser, handleSignup, validateMod, getUsers, getFriends }
+    return { getUser, user, listUsers, isMod, isFriend, listFriends, getIsFriendState, handlerAddFriend, handleUpdateUser, validateMod, getUsers, getFriends }
 }

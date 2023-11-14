@@ -1,0 +1,38 @@
+.confirm_pay_container {
+    background-color: var(--background_color);
+    height: 90vh;
+    color: var(--color_font);
+    display: flex;
+    gap: 1em;
+    flex-direction: column;
+}
+
+.confirm_pay_list_container {
+    padding-top: 1em;
+    display: flex;
+    flex-direction: column;
+    gap: 1em;
+    overflow: auto;
+    max-height: 80%;
+}
+
+.confirm_pay_list_container::-webkit-scrollbar {
+    display: none;
+}
+
+.confirm_pay_payment_method_container{
+    padding: 1em;
+    display: flex;
+    gap: 1em;
+}
+
+.confirm_pay_nav {
+    background-color: var(--nav_color);
+    color: var(--color_font);
+    padding: 1em;
+    align-self: flex-end;
+    width: 100%;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+}

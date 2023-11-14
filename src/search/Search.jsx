@@ -3,13 +3,13 @@ import Header from "../header/Header";
 import Searcher from "../searcher/Searcher";
 import './Search.css'
 import { useParams } from "react-router-dom";
-import SortButton from "../sort_button/SortButton";
 import { useBook } from "../hooks/useBook";
 import { useEffect } from "react";
 
 export default function Search() {
     let { title } = useParams();
-    const { listBooks,initiaList,setListBooks, getBooksByTitle, getBooksByPrice } = useBook()
+    const { listBooks, getBooksByTitle } = useBook()
+    cost 
 
     useEffect(() => {
         const fetchData = async () => {
@@ -20,7 +20,7 @@ export default function Search() {
 
     return (
         <>
-            <Header goBack>{title}</Header>
+            <Header goBack goBackNavigate={"/Inicio"}>{title}</Header>
             <div className='search_container'>
                 <Searcher placeholder="Buscar..." />
                 <ListBook list={listBooks} />
