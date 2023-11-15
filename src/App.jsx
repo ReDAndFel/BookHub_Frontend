@@ -21,6 +21,7 @@ import AddPaymentMethod from './info_payment_method/AddPaymentMethod';
 import ConfirmPay from './confirm_pay/ConfirmPay';
 import Cart from './cart/Cart';
 import { CartProvider } from './hooks/useCart';
+import ReadBook from './read_book/ReadBook';
 
 
 
@@ -52,6 +53,8 @@ function App() {
             <Route path='/Info_metodo_de_pago/:idPaymentMethod' element={<AddPaymentMethod />} />
             <Route path='/Info_metodo_de_pago/' element={<AddPaymentMethod />} />
             <Route path='/Confirmar_compra' element={<ConfirmPay />} />
+            <Route path='/Leer/:idBook' element={<ReadBook />} />
+            
           </Routes>
         </div>
       </CartProvider>

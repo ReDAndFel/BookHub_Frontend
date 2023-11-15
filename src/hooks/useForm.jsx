@@ -10,12 +10,12 @@ export const useForm = (initialForm, validationsForm) => {
         setErrors(validationsForm(form));
     };
 
-    const handleSelectImage = (e) => {
+    const handleSelectFile = (e) => {
         const selectedFile = e.target.files[0];
-        const imageUrl = URL.createObjectURL(selectedFile);
-        setForm({ ...form, file: imageUrl });
+        setForm({ ...form, file: selectedFile });
         setErrors(validationsForm(form));
-    };
+      };
+      
 
     const handleBlur = (e) => {
         handleChange(e);
@@ -26,6 +26,6 @@ export const useForm = (initialForm, validationsForm) => {
     }
 
     return {
-        form, cleanForm, errors,setForm, handleChange, handleSelectImage, handleBlur, setErrors
+        form, cleanForm, errors,setForm, handleChange, handleSelectFile, handleBlur, setErrors
     };
 }

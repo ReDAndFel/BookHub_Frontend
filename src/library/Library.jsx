@@ -1,4 +1,4 @@
-import { useParams } from "react-router-dom";
+import { useNavigate, useParams } from "react-router-dom";
 import CardBook from "../card_book/CardBook";
 import Searcher from "../searcher/Searcher";
 import './Library.css'
@@ -7,17 +7,22 @@ import Header from "../header/Header";
 import ListBook from "../list_book/ListBook";
 import { useBook } from "../hooks/useBook";
 import { useEffect } from "react";
+import Button from "../button/Button";
+import { useAuth } from "../AuthContext";
 
 export default function Library() {
 
     const {library,getLibrary} = useBook()
     const params = useParams(); 
+    const {token} = useAuth();
+    const navigate = useNavigate()
 
-    useEffect(() => {
-        const fetchData = async () => {
-            await getLibrary(params.idUser);
-        };    
-        fetchData();
+    useEffect(() => {      
+        if(token.idUser != ""){
+            getLibrary(params.idUser);     
+        } else{
+            navigate("/Login")
+        }               
     }, []);    
     
     return (

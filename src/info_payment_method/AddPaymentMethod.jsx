@@ -49,13 +49,15 @@ export default function AddPaymentMethod() {
                 console.log("En agregar")
                 console.log("El formulario fue: ")
                 console.log(form)
+                
             } else {
                 handleUpdatePaymentMethod(idPaymentMethod, form)
                 console.log("En Actualizar")
                 console.log("El formulario fue: ")
-                console.log(form)
+                console.log(form)               
 
             }
+           
             navigate(`/Metodos_de_pago/${idUser}`);
         }
     }

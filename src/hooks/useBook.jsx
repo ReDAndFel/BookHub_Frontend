@@ -16,9 +16,10 @@ export const useBook = () => {
         reviews: 0,
         price: 0,
         idStateBook: 1,
-        category: '',
+        idCategory: 0,
         sinopsis: '',
-        file: []
+        file: [],
+        idUser:0
     }
 
     const [book, setBook] = useState(bookInitial);
@@ -100,6 +101,7 @@ export const useBook = () => {
     }
 
     const handleRead = () => {
+        navigate(`/Leer/${book.id}`)
 
     }
 

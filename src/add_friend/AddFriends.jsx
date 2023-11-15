@@ -1,12 +1,10 @@
 import { useNavigate } from 'react-router-dom';
-import Button from '../button/Button';
 import Header from '../header/Header';
-import Searcher from '../searcher/Searcher';
 import UserListItem from '../user_list_item/UserListItem';
 import './AddFriends.css'
 import { useAuth } from '../AuthContext';
 import { useUser } from '../hooks/useUser';
-import { useEffect, useState } from 'react';
+import { useEffect } from 'react';
 
 export default function AddFriends() {
 

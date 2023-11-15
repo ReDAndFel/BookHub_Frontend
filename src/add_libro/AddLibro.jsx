@@ -9,17 +9,9 @@ import { useEffect, useState } from "react";
 import { useUser } from "../hooks/useUser";
 import { useAuth } from "../AuthContext";
 import Button from "../button/Button";
-
-const initialForm = {
-    image: "",
-    title: "",
-    price: "",
-    editorial: "",
-    synopsis: "",
-    category: "",
-    availability: false,
-    file: ""
-}
+import { useBook } from "../hooks/useBook";
+import { useFile } from "../hooks/useFile";
+import { useCategory } from "../hooks/useCategory";
 
 const validationsForm = (form) => {
     let errors = {};
@@ -27,42 +19,52 @@ const validationsForm = (form) => {
     if (form.title === '') {
         errors.title = 'El campo "titulo" es requerido'
     }
+    if (form.autor === '') {
+        errors.autor = 'El campo "autor" es requerido'
+    }
     if (form.price === '') {
         errors.price = 'El campo "precio" es requerido'
     }
-    if (form.editorial === '') {
-        errors.editorial = 'El campo "editorial" es requerido'
+    if (form.sinopsis === '') {
+        errors.sinopsis = 'El campo "sinopsis" es requerido'
     }
-    if (form.synopsis === '') {
-        errors.synopsis = 'El campo "sinopsis" es requerido'
+    if (form.idCategory === '') {
+        errors.idCategory = 'El campo "categoria" es requerido'
     }
-    if (form.category === '') {
-        errors.category = 'El campo "categoria" es requerido'
-    }
-    if (form.availability === '') {
-        errors.availability = 'El campo "disponibilidad" es requerido'
-    }
+    
     return errors;
 };
 
 export default function AddLibro(e) {
 
-    const { isMod, validateMod } = useUser();
-    const { token } = useAuth();
-    const { form, errors, setErrors, handleChange, handleBlur, cleanForm } = useForm(initialForm, validationsForm);
 
+    const { isMod, validateMod } = useUser();
+    const { book, handleAddBook } = useBook();
+    const { token } = useAuth();
+    const { form, errors, setErrors, handleChange, handleBlur, cleanForm } = useForm(book, validationsForm);
     const [idUser, setIdUser] = useState('');
     const [isLoged, setIsLoged] = useState(false);
+    const { getCategories, listCategory } = useCategory()
+    const { uploadFile, uploadImage, file, image } = useFile();
 
     const navigate = useNavigate();
 
-    const handleSubmit = (e) => {
+    const handleSubmit = async (e) => {
         e.preventDefault();
         setErrors(validationsForm(form));
         if (Object.keys(errors).length === 0) {
+            console.log("el form a enviar al upload y eso es ")
+            console.log(form)
+            await uploadFile(form.file)
+            await uploadImage(form.image)
+            form.idUser = token.idUser
+            form.file = file
+            form.image = image
             console.log(form);
-            navigate('/Inicio');
-
+            if (form.image != [] && form.file != []) {
+                handleAddBook(form)
+                navigate('/Inicio');
+            }
         }
     }
 
@@ -71,13 +73,14 @@ export default function AddLibro(e) {
         if (token.idUser != "") {
             setIdUser(token.idUser);
             setIsLoged(true)
+            getCategories()
         }
 
     }, [])
 
     return (
         <>
-            <Header goBack>Publicar Libro</Header>
+            <Header goBack goBackNavigate={"/Inicio"}>Publicar Libro</Header>
             <div className="add_book_main_container">
 
                 {isLoged ? (
@@ -86,7 +89,6 @@ export default function AddLibro(e) {
                             <label className={`label_file ${form.image !== '' && 'selected'}`} htmlFor="image">Subir Imagen</label>
                             <input className={`input_file ${form.image !== '' && 'selected'}`} type='file' name='image' id='image' onChange={handleChange} required />
                         </div>
-
 
                         <div className='texfield_add_book'>
                             <FontAwesomeIcon icon={faHeading} />
@@ -100,36 +102,27 @@ export default function AddLibro(e) {
                         </div>
                         <div className='texfield_add_book'>
                             <FontAwesomeIcon icon={faPenNib} />
-                            <input type='text' name='editorial' id='editorial' placeholder="Editorial" value={form.editorial} onChange={handleChange} onBlur={handleBlur} autoComplete="off" required />
-                            {errors.editorial && <p>{errors.editorial}</p>}
+                            <input type='text' name='autor' id='autor' placeholder="Autor" value={form.autor} onChange={handleChange} onBlur={handleBlur} autoComplete="off" />
+                        </div>
+                        <div className='texfield_add_book'>
+                            <FontAwesomeIcon icon={faPenNib} />
+                            <input type='text' name='editorial' id='editorial' placeholder="Editorial" value={form.editorial} onChange={handleChange} onBlur={handleBlur} autoComplete="off" />
                         </div>
 
                         <div className='textarea_add_book'>
                             <FontAwesomeIcon icon={faPenNib} />
-                            <textarea name="synopsis" id="synopsis" placeholder="Sinopsis" value={form.synopsis} onChange={handleChange} onBlur={handleBlur} autoComplete="off" required />
-                            {errors.synopsis && <p>{errors.synopsis}</p>}
+                            <textarea name="sinopsis" id="sinopsis" placeholder="Sinopsis" value={form.sinopsis} onChange={handleChange} onBlur={handleBlur} autoComplete="off" required />
+                            {errors.sinopsis && <p>{errors.sinopsis}</p>}
                         </div>
 
                         <div className='combo_box_book'>
-                            <select name="category" id="category" value={form.category} onChange={handleChange} onBlur={handleBlur} required>
+                            <select name="idCategory" id="idCategory" value={parseInt(form.idCategory)} onChange={handleChange} onBlur={handleBlur} required>
                                 <option value=''>Selecciona una Categoría</option>
-                                <option value="Terror">Terror</option>
-                                <option value="Educacion">Educacion</option>
-                                <option value="Historia">Historia</option>
-                                <option value="Romance">Romance</option>
-                                <option value="Salud y Cuidado">Salud y Cuidado</option>
-                                <option value="Fantasia">Fantasia</option>
-                                <option value="Misterio">Misterio</option>
+                                {listCategory.map((category) => (
+                                    <option key={category.id} value={parseInt(category.id)}>{category.nombre}</option>
+                                ))}
                             </select>
-                            {errors.category && <p>{errors.category}</p>}
-                        </div>
-
-                        <div className='combo_box_book'>
-                            <select name="availability" id="availability">
-                                <option value={true}>Disponible</option>
-                                <option value={false}>No disponible</option>
-                            </select>
-                            {errors.availability && <p>{errors.availability}</p>}
+                            {errors.idCategory && <p>{errors.idCategory}</p>}
                         </div>
 
                         <div className='input_file_add_book'>
