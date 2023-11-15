@@ -8,6 +8,7 @@ import { faLock } from "@fortawesome/free-solid-svg-icons";
 import { useModal } from "../hooks/useModal";
 import { Modal } from "../modal/Modal";
 import { useUser } from "../hooks/useUser";
+import { useSesion } from "../hooks/useSesion";
 
 const initialForm = {
     username: '',
@@ -39,13 +40,13 @@ export default function Signup() {
 
     const { form, cleanForm, errors, setErrors, handleChange, handleBlur } = useForm(initialForm, validationsForm);
     const [openModalConfirmSignup, setOpenModalConfirmSignup] = useModal(false);
-    const {handleSignup} = useUser();
+    const {createUser} = useSesion()
 
     const handleSubmit = (event) => {
         event.preventDefault();
         setErrors(validationsForm(form));
         if (Object.keys(errors).length === 0) {
-            handleSignup(form);
+            createUser(form);
             setOpenModalConfirmSignup();
             cleanForm();
         }

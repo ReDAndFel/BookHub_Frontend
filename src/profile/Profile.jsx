@@ -45,7 +45,7 @@ export default function Profile() {
 
     return (
         <>
-            <Header goBack goBackNavigate={-1}> Perfil</Header>
+            <Header goBack goBackNavigate={`/Cuenta`}> Perfil</Header>
             <div className='profile_container'>
                 <div className="profile_header">
                     <FontAwesomeIcon className="profile_icon" icon={faCircleUser} />

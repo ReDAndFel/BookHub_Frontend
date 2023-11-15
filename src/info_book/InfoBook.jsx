@@ -97,7 +97,7 @@ export default function InfoBook() {
 
                 {isLoged && (
                     <div className='review_info_book_container'>
-                        {!isMod && <AddReview idBook={book.id} idUser={idUser} />}
+                        {!isMod && isBought && <AddReview idBook={book.id} idUser={idUser} />}
                         <ListReviews idBook={idBook} />
                     </div>
                 )}
